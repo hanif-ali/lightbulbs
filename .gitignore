@@ -1,0 +1,21 @@
+# Virtual Environment
+env/
+
+# VSCode Files
+.vscode
+
+# Python generated files
+*/**/__pycache__
+*.pyc 
+
+# Vim Temp files
+*.sw?
+
+# Database files
+*.sqlite3
+
+# Unit testing and coverage
+.coverage
+.coverage.*
+.cache
+nosetests.xml
