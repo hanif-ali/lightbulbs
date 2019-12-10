@@ -6,4 +6,37 @@
 .notification {
   float: right;
 }
+
+.feed-item {
+  margin-bottom: 20px;
+}
+
+.feed-item .footer-right {
+  float: right;
+}
+
+.feed-item .footer-right .send-proposal, .feed-item .footer-right .upvote-button, .feed-item .footer-right .downvote-button, .feed-item .footer-right .star-button {
+  margin-right: 8px;
+}
+
+.feed-item .footer-right .upvote-button, .feed-item .footer-right .downvote-button, .feed-item .footer-right .star-button {
+  border-style: none;
+  background: transparent;
+  outline: none;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+}
+
+.feed-item .footer-right .upvote-button:hover, .feed-item .footer-right .downvote-button:hover, .feed-item .footer-right .star-button:hover {
+  color: #f5ba1a;
+}
+
+.feed-item .footer-right .send-proposal {
+  text-decoration: none;
+  color: grey;
+}
+
+.feed-item .footer-right .send-proposal:hover {
+  color: black;
+}
 /*# sourceMappingURL=styles.css.map */

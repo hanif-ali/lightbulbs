@@ -6,3 +6,32 @@
 .notification{
     float:right;
 }
+
+.feed-item{
+    margin-bottom:20px;
+
+    .footer-right{
+        float: right;
+
+        .send-proposal, .upvote-button, .downvote-button, .star-button{
+            margin-right: 8px;
+        }
+        .upvote-button, .downvote-button, .star-button{
+            border-style: none;
+            background: transparent;
+            outline: none;
+            transition:all 0.1s;
+            &:hover{
+                color:rgb(245, 186, 26);
+            }
+        }
+        .send-proposal{
+            text-decoration: none;
+            color: grey;
+            &:hover{
+                color:black;
+            }
+        }
+    }
+
+}
