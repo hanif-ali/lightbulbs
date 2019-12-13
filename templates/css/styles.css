@@ -63,4 +63,16 @@
 .message .message-footer .message-controls .message-reply:hover {
   color: #24acfa;
 }
+
+.sent .sent-footer .sent-timestamp {
+  float: left;
+}
+
+.sent .sent-footer .sent-controls {
+  float: right;
+}
+
+.sent .sent-footer .sent-controls .sent-delete:hover {
+  color: red;
+}
 /*# sourceMappingURL=styles.css.map */

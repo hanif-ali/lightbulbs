@@ -58,3 +58,17 @@
         }
     }
 }
+
+.sent{
+    .sent-footer{
+        .sent-timestamp{
+            float: left;
+        }
+        .sent-controls{
+            float: right;
+            .sent-delete:hover{
+                color: red;
+            }
+        }
+    }
+}
