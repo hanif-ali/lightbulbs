@@ -35,3 +35,26 @@
     }
 
 }
+
+
+.message{
+    margin-bottom: 30px;
+
+    .message-footer{
+        .message-timestamp{
+            float: left;
+        }
+        .message-controls{
+            float: right;
+            span{
+                margin: auto 8px;
+            }
+            .message-delete:hover{
+                color: red;
+            }
+            .message-reply:hover{
+                color: rgb(36, 172, 250)
+            }
+        }
+    }
+}

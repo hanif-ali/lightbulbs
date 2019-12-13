@@ -39,4 +39,28 @@
 .feed-item .footer-right .send-proposal:hover {
   color: black;
 }
+
+.message {
+  margin-bottom: 30px;
+}
+
+.message .message-footer .message-timestamp {
+  float: left;
+}
+
+.message .message-footer .message-controls {
+  float: right;
+}
+
+.message .message-footer .message-controls span {
+  margin: auto 8px;
+}
+
+.message .message-footer .message-controls .message-delete:hover {
+  color: red;
+}
+
+.message .message-footer .message-controls .message-reply:hover {
+  color: #24acfa;
+}
 /*# sourceMappingURL=styles.css.map */
