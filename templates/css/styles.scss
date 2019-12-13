@@ -72,3 +72,28 @@
         }
     }
 }
+
+.footer-left{
+    float: left;
+}
+.footer-right{
+    float :right;
+}
+
+.delete-button, .edit-button{
+    border-style: none;
+    background: none;
+    margin: 0 6px;
+}
+
+.delete-button:hover{
+    color: red;
+}
+.edit-button:hover{
+    color:rgb(50, 88, 192);
+
+}
+
+.created{
+    margin-bottom: 10px;
+}

@@ -75,4 +75,30 @@
 .sent .sent-footer .sent-controls .sent-delete:hover {
   color: red;
 }
+
+.footer-left {
+  float: left;
+}
+
+.footer-right {
+  float: right;
+}
+
+.delete-button, .edit-button {
+  border-style: none;
+  background: none;
+  margin: 0 6px;
+}
+
+.delete-button:hover {
+  color: red;
+}
+
+.edit-button:hover {
+  color: #3258c0;
+}
+
+.created {
+  margin-bottom: 10px;
+}
 /*# sourceMappingURL=styles.css.map */
