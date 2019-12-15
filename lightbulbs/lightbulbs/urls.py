@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from LB.views import feed as feed_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('feed/', feed_view, name='feed')
 ]
