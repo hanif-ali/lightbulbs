@@ -17,9 +17,9 @@ class LBUserChangeForm(UserChangeForm):
         fields = "__all__"
 
 
-class Registrationform(UserCreationForm):
-    email = forms.EmailField()
+class RegistrationForm(UserCreationForm):
 
     class Meta:
         model = LBUser
-        order = ['email', 'username', 'password1' 'password2']
+        fields = ['first_name', 'last_name', 'username', 'email', 'password']
+        order = fields
