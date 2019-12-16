@@ -26,4 +26,33 @@ class RegistrationForm(UserCreationForm):
 
 
 class LoginForm(forms.Form):
-    pass
+    username = forms.CharField(max_length=20, min_length=5)
+    password = forms.PasswordInput()
+
+
+class LBCreationForm(forms.Form):
+    category = forms.CharField(max_length=20)
+    title = forms.CharField(max_length=50)
+    description = forms.TextInput()
+
+
+class ProposalForm(forms.Form):
+    message = forms.TextInput()
+
+
+class MessageFrom(forms.Form):
+    message = forms.TextInput()
+
+
+class EditProfileForm(forms.Form):
+    first_name = forms.CharField(max_length=20)
+    last_name = forms.CharField(max_length=20)
+    description = forms.CharField(max_length=30, empty_value=True)
+    profession = forms.CharField(max_length=30)
+    bio = forms.TextField(empty_value=True)
+    age = forms.PositiveSmallIntegerField()
+    skills = forms.TextField(empty_value=True)
+    contact_number = forms.PositiveIntegerField(empty_value=True)
+    linkedin = forms.URLField(empty_value=True)
+    facebook = forms.URLField(empty_value=True)
+    github = forms.URLField(empty_value=True)
