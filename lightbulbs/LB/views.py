@@ -6,6 +6,7 @@ from django.urls import reverse
 
 
 
+
 def register(request):
     """View to both render the registration page and handle registration stuff"""
 
@@ -25,3 +26,83 @@ def register(request):
         form = Registrationform()
 
     return render(request, 'LB/registration.html', {'form':form} )
+
+
+def homepage(request):
+    pass
+
+
+
+def login(request):
+    pass
+
+def feed(request):
+    pass
+
+
+def notifications(request):
+    pass
+
+
+def delete_notification(request):
+    pass
+
+
+def inbox(request):
+    pass
+
+
+def reply(request):
+    pass
+
+
+def delete_message(request):
+    pass
+
+
+def idea(request):
+    pass
+
+
+def profile(request):
+    pass
+
+
+def edit_profile(request):
+    pass
+
+
+def my_ideas(request):
+    pass
+
+
+def create_idea(request):
+    pass
+
+
+def delete_idea(request):
+    pass
+
+
+def edit_idea(request):
+    pass
+
+
+def sent_proposals(request):
+    pass
+
+
+def delete_sent(request):
+    pass
+
+
+def upvote(request):
+    pass
+
+
+def downvote(request):
+    pass
+
+
+def star(request):
+    pass
