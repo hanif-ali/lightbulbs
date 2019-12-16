@@ -1,15 +1,21 @@
 from django.shortcuts import render
-from .forms import RegistrationForm
+from .forms import RegistrationForm, LoginForm, LBCreationForm, ProposalForm, MessageFrom, EditProfileForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import LBUser
-
+from django.http import HttpResponse
+from django.contrib.auth import login, authenticate
 
 
 
 def register(request):
     """View to both render the registration page and handle registration stuff"""
+
+    if request.user.is_authenticated:     # Redirect if already logged in 
+        messages.info(request, "You are already logged in.")
+        return redirect(reverse("feed"))
+
 
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -17,11 +23,11 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, 'Your Account has been created! Edit your Profile Now.')
-            return redirect(reverse("edit-profile-page"))  # Profile Edit Page
+            return redirect(reverse("edit-profile"))  # Profile Edit Page
 
         else:
             messages.error(request, "Could not create your account. The form is invalid!")
-            return redirect(reverse("registration-page"))
+            return redirect(reverse("register"))
 
     else:
         form = RegistrationForm()
@@ -30,33 +36,32 @@ def register(request):
 
 
 def homepage(request):
-    if request.session.get("logged_in"):
+    if request.user.is_authenticated:     # Redirect if already logged in 
         messages.info(request, "You are already logged in.")
         return redirect(reverse("feed"))
 
-    else:
-        return render(request, "LB/home.html", {})
+
+    return render(request, "LB/home.html", {})
 
 
-def login(request):
-    if request.session.get("logged_in"):
+def login_view(request):
+    if request.user.is_authenticated:     # Redirect if already logged in 
         messages.info(request, "You are already logged in.")
         return redirect(reverse("feed"))
 
-    else:
-        if request.method == "POST":
-            form = LoginForm(request.POST)
-            if form.is_valid():
-                # Authentication process
-                pass
-                
-            else:
-                messages.warning(request, "The username and/or password is incorrect. ")
-                return redirect(reverse("login-page"))
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = form.login(request)
+            if user:
+                login(request, user)
+                return redirect(reverse("feed"))
 
-        else:
-            form = LoginForm()
-            return render(request, "LB/login.html", {'form':form})
+
+    else:
+        form = LoginForm()
+
+    return render(request, "LB/login.html", {'form':form})
 
 
 def feed(request):
