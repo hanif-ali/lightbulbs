@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from .models import LBUser
+from django.contrib.auth import authenticate
 
 
 class LBUserCreationForm(UserCreationForm):
@@ -26,8 +27,24 @@ class RegistrationForm(UserCreationForm):
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=20, min_length=5)
-    password = forms.PasswordInput()
+    username = forms.CharField(label="Username", max_length=20, min_length=5)
+    password = forms.CharField(max_length=30, widget=forms.PasswordInput)
+
+    def clean(self):
+        username = self.cleaned_data.get("username")
+        password = self.cleaned_data.get("password")
+        user = authenticate(username=username, password=password)
+        if not user or not user.is_active:
+            raise forms.ValidationError("The username and/or password is invalid!")
+        return self.cleaned_data
+
+
+    def login(self, request):
+        username = self.cleaned_data.get("username")
+        password = self.cleaned_data.get("password")
+        user = authenticate(username=username, password=password)
+        return user
+
 
 
 class LBCreationForm(forms.Form):
@@ -49,10 +66,10 @@ class EditProfileForm(forms.Form):
     last_name = forms.CharField(max_length=20)
     description = forms.CharField(max_length=30, empty_value=True)
     profession = forms.CharField(max_length=30)
-    bio = forms.TextField(empty_value=True)
-    age = forms.PositiveSmallIntegerField()
-    skills = forms.TextField(empty_value=True)
-    contact_number = forms.PositiveIntegerField(empty_value=True)
-    linkedin = forms.URLField(empty_value=True)
-    facebook = forms.URLField(empty_value=True)
-    github = forms.URLField(empty_value=True)
+    bio = forms.TextInput()
+    age = forms.NumberInput()
+    skills = forms.TextInput()
+    contact_number = forms.NumberInput()
+    linkedin = forms.URLInput()
+    facebook = forms.URLInput()
+    github = forms.URLInput()
