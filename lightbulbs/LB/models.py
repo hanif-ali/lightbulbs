@@ -53,7 +53,7 @@ class Proposal(models.Model):
     message = models.TextField()
 
     def __str__(self):
-        return f"Proposal from {self.name} for {self.lightbulb.title}"
+        return f"Proposal from {self.sender} for {self.lightbulb.title}"
 
 
 class Message(models.Model):
@@ -69,13 +69,14 @@ class Message(models.Model):
         return f"{self.sender} - {self.message}"
 
 
-class Notifiation(models.Model):
+class Notification(models.Model):
     """Model for notifications. Includes a link which is the page that the app will go to 
     upon clicking that link"""
 
     user = models.ForeignKey(LBUser, on_delete=models.CASCADE, related_name="notifications")
     message = models.CharField(max_length=50)
     link = models.URLField()
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.message}"
