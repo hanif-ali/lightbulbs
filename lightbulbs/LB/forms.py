@@ -23,3 +23,7 @@ class RegistrationForm(UserCreationForm):
         model = LBUser
         fields = ['first_name', 'last_name', 'username', 'email', 'password']
         order = fields
+
+
+class LoginForm(forms.Form):
+    pass

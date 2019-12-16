@@ -3,6 +3,7 @@ from .forms import RegistrationForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from .models import LBUser
 
 
 
@@ -11,7 +12,7 @@ def register(request):
     """View to both render the registration page and handle registration stuff"""
 
     if request.method == 'POST':
-        form = Registrationform(request.POST)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -19,21 +20,44 @@ def register(request):
             return redirect(reverse("edit-profile-page"))  # Profile Edit Page
 
         else:
-            messages.error("Could not create your account. The form is invalid!")
+            messages.error(request, "Could not create your account. The form is invalid!")
             return redirect(reverse("registration-page"))
 
     else:
-        form = Registrationform()
+        form = RegistrationForm()
 
     return render(request, 'LB/registration.html', {'form':form} )
 
 
 def homepage(request):
-    pass
+    if request.session.get("logged_in"):
+        messages.info(request, "You are already logged in.")
+        return redirect(reverse("feed"))
+
+    else:
+        return render(request, "LB/home.html", {})
 
 
 def login(request):
-    pass
+    if request.session.get("logged_in"):
+        messages.info(request, "You are already logged in.")
+        return redirect(reverse("feed"))
+
+    else:
+        if request.method == "POST":
+            form = LoginForm(request.POST)
+            if form.is_valid():
+                # Authentication process
+                pass
+                
+            else:
+                messages.warning(request, "The username and/or password is incorrect. ")
+                return redirect(reverse("login-page"))
+
+        else:
+            form = LoginForm()
+            return render(request, "LB/login.html", {'form':form})
+
 
 def feed(request):
     pass
