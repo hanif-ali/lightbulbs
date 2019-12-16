@@ -15,3 +15,11 @@ class LBUserChangeForm(UserChangeForm):
     class Meta(UserChangeForm.Meta):
         model = LBUser
         fields = "__all__"
+
+
+class Registrationform(UserCreationForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = LBUser
+        order = ['email', 'username', 'password1' 'password2']
