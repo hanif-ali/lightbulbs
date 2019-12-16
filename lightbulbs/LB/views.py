@@ -32,7 +32,6 @@ def homepage(request):
     pass
 
 
-
 def login(request):
     pass
 
@@ -40,11 +39,15 @@ def feed(request):
     pass
 
 
+def send_proposal(request, id_number):
+    pass
+
+
 def notifications(request):
     pass
 
 
-def delete_notification(request):
+def delete_notification(request, id_number):
     pass
 
 
@@ -52,15 +55,15 @@ def inbox(request):
     pass
 
 
-def reply(request):
+def reply(request, id_number):
     pass
 
 
-def delete_message(request):
+def delete_message(request, id_number):
     pass
 
 
-def idea(request):
+def idea(request, id_number):
     pass
 
 
@@ -76,15 +79,15 @@ def my_ideas(request):
     pass
 
 
-def create_idea(request):
+def create_idea(request, id_number):
     pass
 
 
-def delete_idea(request):
+def delete_idea(request, id_number):
     pass
 
 
-def edit_idea(request):
+def edit_idea(request, id_number):
     pass
 
 
@@ -92,17 +95,17 @@ def sent_proposals(request):
     pass
 
 
-def delete_sent(request):
+def delete_sent(request, id_number):
     pass
 
 
-def upvote(request):
+def upvote(request, id_number):
     pass
 
 
-def downvote(request):
+def downvote(request, id_number):
     pass
 
 
-def star(request):
+def star(request, id_number):
     pass
