@@ -19,6 +19,9 @@ class LBUser(AbstractUser):
     linkedin = models.URLField(null=True, blank=True)
     facebook = models.URLField(null=True, blank=True)
     github = models.URLField(null=True, blank=True)
+    upvotes = models.ManyToManyField('Lightbulb', related_name="upvoters")
+    downvotes = models.ManyToManyField('Lightbulb', related_name="downvoters")
+    stars = models.ManyToManyField('Lightbulb', related_name="starrers")
     
     
     def __str__(self):
