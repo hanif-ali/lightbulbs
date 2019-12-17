@@ -5,7 +5,7 @@ def getRating(upvotes,downvotes,timestamp):
     
     def time_difference(timestamp):
         startingtime=datetime(2000,1,1)
-        return timestamp-datetime.timestamp(startingtime)
+        return datetime.timestamp(timestamp)-datetime.timestamp(startingtime)
    
     score = upvotes-downvotes
 

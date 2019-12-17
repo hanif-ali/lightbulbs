@@ -43,10 +43,11 @@ class Lightbulb(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     category = models.CharField(max_length=20)
-    rating = models.DecimalField( decimal_places=6,max_digits=12)
+    rating = models.DecimalField( decimal_places=6,max_digits=12, null=True)
     
     def save(self, *args, **kwargs):
-        self.rating = getRating(0, 0, time.time())
+        super(Lightbulb, self).save(*args, **kwargs)
+        self.rating = getRating(self.upvoters.count(), self.downvoters.count(), self.timestamp)
         super(Lightbulb, self).save(*args, **kwargs)
 
     def __str__(self):

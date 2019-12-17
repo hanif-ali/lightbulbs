@@ -7,7 +7,7 @@
 <h5>Created:</h5>
 <ul>
 {% for idea in ideas %}
-    <li>{{idea}} <a href="{% url 'delete-idea' id_number=idea.id %}">Delete</a></li>
+    <li>{{idea}} <a href="{% url 'edit-idea' id_number=idea.id %}">Eidt</a><a href="{% url 'delete-idea' id_number=idea.id %}">Delete</a></li>
 {% endfor %}
 </ul>
 <br>

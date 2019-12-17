@@ -177,8 +177,18 @@ class DeleteIdea(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return redirect(self.success_url)
 
 
-def edit_idea(request, id_number):
-    pass
+class EditIdea(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    template_name = "LB/editidea.html"
+    model = Lightbulb
+    pk_url_kwarg = "id_number"
+    fields = ["title", "description", "category"]
+    context_object_name = "idea"
+
+    def test_func(self):
+        idea = self.get_object()
+        if idea.creator == self.request.user:
+            return True
+        return False
 
 
 def sent_proposals(request):
