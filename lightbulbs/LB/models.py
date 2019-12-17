@@ -45,8 +45,8 @@ class Lightbulb(models.Model):
     rating = models.DecimalField( decimal_places=6,max_digits=12)
     
     def save(self, *args, **kwargs):
-        self.rating = getRating(self.upvotes.count(), self.downvotes.count(), time.time())
-        super(LBUser, self).save(*args, **kwargs)
+        self.rating = getRating(0, 0, time.time())
+        super(Lightbulb, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.creator} - {self.title}"

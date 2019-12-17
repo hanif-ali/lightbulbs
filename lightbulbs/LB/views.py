@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .forms import RegistrationForm, LoginForm, LBCreationForm, ProposalForm, MessageFrom, EditProfileForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .models import LBUser
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
@@ -88,14 +88,14 @@ def logout_view(request):
 
 
 
-class Feed(ListView):
+class Feed(ListView, LoginRequiredMixin):
     model = Lightbulb
     template_name = 'LB/feed.html'
     context_object_name = 'ideas'
     ordering = ['-rating']
 
 
-class Idea(DetailView): 
+class Idea(DetailView, LoginRequiredMixin): 
     model = Lightbulb
     template_name = 'LB/idea.html'
     context_object_name = "idea"
@@ -122,8 +122,16 @@ def reply(request, id_number):
     pass
 
 
+
 def delete_message(request, id_number):
     pass
+
+
+@login_required(login_url=reverse_lazy("login"))
+def my_ideas(request):
+    ideas = request.user.lightbulbs.all()
+    stars = request.user.stars.all()
+    return render(request, "LB/myideas.html", locals())
 
 
 def profile(request):
@@ -134,16 +142,29 @@ def edit_profile(request):
     pass
 
 
-def my_ideas(request):
-    pass
-
-
 def create_idea(request, id_number):
     pass
 
 
-def delete_idea(request, id_number):
-    pass
+class DeleteIdea(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Lightbulb
+    success_message = "The Lightbulb was removed successfully"
+    pk_url_kwarg = "id_number"
+    success_url = reverse_lazy("my-ideas")
+
+    def test_func(self):
+        idea = self.get_object()
+        if self.request.user == idea.creator:
+            return True
+        return False
+    
+    def get(self, *args, **kwargs):
+        return self.post(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        super(DeleteIdea, self).delete(*args, **kwargs)
+        return redirect(self.success_url)
 
 
 def edit_idea(request, id_number):
