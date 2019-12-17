@@ -8,6 +8,13 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 
 
+def create_user(first_name, last_name, email, username, password, age):
+    user = LBUser(first_name=first_name, last_name=last_name, email=email, username=username, age=age)
+    user.set_password(password)
+    user.save()
+    return user
+
+
 
 def register(request):
     """View to both render the registration page and handle registration stuff"""
@@ -20,14 +27,16 @@ def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
+            first_name = form.cleaned_data["first_name"]
+            last_name = form.cleaned_data["last_name"]
+            email = form.cleaned_data["email"]
+            password = form.cleaned_data["password"]
+            username = form.cleaned_data["username"]
+            age = form.cleaned_data["age"]
+            user = create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password, age=age)
+            login(request, user)
             messages.success(request, 'Your Account has been created! Edit your Profile Now.')
             return redirect(reverse("edit-profile"))  # Profile Edit Page
-
-        else:
-            messages.error(request, "Could not create your account. The form is invalid!")
-            return redirect(reverse("register"))
 
     else:
         form = RegistrationForm()

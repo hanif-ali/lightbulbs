@@ -7,8 +7,19 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = LBUser
-        fields = ['first_name', 'last_name', 'username', 'email', 'password']
+        fields = ['first_name', 'last_name', 'username', 'email', 'password', 'age']
         order = fields
+
+    def __init__(self, *args, **kwargs):
+        super(RegistrationForm, self).__init__(*args, **kwargs)
+        self.fields['password'].widget = forms.PasswordInput()
+
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+        if LBUser.objects.filter(username=username).exists():
+            raise forms.ValidationError("This username has already been taken.")
+
+        return username
 
 
 
