@@ -131,15 +131,35 @@ class DeleteNotification(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     
 
 
-def inbox(request):
-    pass
+class Inbox(LoginRequiredMixin, ListView):
+    model = Message
+    template_name = "LB/inbox.html"
+    context_object_name = "messages"
+
+    def get_queryset(self):
+        queryset = Message.objects.filter(receiver=self.request.user)
+        return queryset
 
 
-def reply(request, id_number):
-    pass
+class DeleteMessage(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Message
+    pk_url_kwarg = "id_number"
+    success_url = reverse_lazy("inbox")
+
+    
+    def test_func(self):
+        self.message = self.get_object()
+        if self.message.receiver == self.request.user:
+            return True
+        return False
+
+    def get(self, *args, **kwargs):
+        messages.warning(self.request, "The message was deleted.")
+        self.message.delete()
+        return redirect(self.success_url)
 
 
-def delete_message(request, id_number):
+class SendMessage(LoginRequiredMixin, CreateView):
     pass
 
 
