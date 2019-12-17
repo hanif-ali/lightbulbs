@@ -5,7 +5,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import LBUser
 from django.http import HttpResponse
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 
 
 def create_user(first_name, last_name, email, username, password, age):
@@ -73,8 +74,17 @@ def login_view(request):
     return render(request, "LB/login.html", {'form':form})
 
 
+def logout_view(request):
+    logout(request)
+    messages.success(request, "Logged Out Successfully")
+    return redirect(reverse("login"))
+
+
+
+@login_required(login_url="/login")
 def feed(request):
-    pass
+    return render(request, "LB/feed.html", {})
+
 
 
 def send_proposal(request, id_number):

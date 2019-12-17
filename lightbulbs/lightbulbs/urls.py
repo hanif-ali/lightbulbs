@@ -21,7 +21,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('', LB.homepage, name='home-page'),
-    path("login-view", LB.login_view, name='login'),
+    path("login", LB.login_view, name='login'),
+    path("logout", LB.logout_view, name="logout"),
     path("register", LB.register, name='register'),
     path("feed", LB.feed, name="feed"),
     path("ideas/send/<int:id_number>", LB.send_proposal, name="send-proposal"),
