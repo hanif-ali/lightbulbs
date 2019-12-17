@@ -106,12 +106,29 @@ def send_proposal(request, id_number):
     pass
 
 
-def notifications(request):
-    pass
+class Notifications(LoginRequiredMixin, ListView):
+    template_name = "LB/notifications.html"
+    context_object_name = "notifications"
+
+    def get_queryset(self):
+        queryset = Notification.objects.filter(user=self.request.user)
+        return queryset
 
 
-def delete_notification(request, id_number):
-    pass
+class DeleteNotification(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Notification
+    pk_url_kwarg = "id_number"
+    
+    def test_func(self):
+        self.notification = self.get_object()
+        if self.notification.user == self.request.user:
+            return True
+        return False
+
+    def get(self, *args, **kwargs):
+        self.notification.delete()
+        return HttpResponse("success")
+    
 
 
 def inbox(request):
@@ -120,7 +137,6 @@ def inbox(request):
 
 def reply(request, id_number):
     pass
-
 
 
 def delete_message(request, id_number):
