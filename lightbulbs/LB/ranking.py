@@ -3,11 +3,10 @@ def getRating(upvotes,downvotes,timestamp):
     from math import log
 
     
-    def getTimePassed(timestamp):
-        current_time=datetime.now()
-        time_seconds=datetime.timestamp(current_time)
-        return time_seconds-timestamp
-
+    def time_difference(timestamp):
+        startingtime=datetime(2000,1,1)
+        return timestamp-datetime.timestamp(startingtime)
+   
     def getScore(upvotes,downvotes):
         return upvotes - downvotes
 
@@ -20,8 +19,7 @@ def getRating(upvotes,downvotes,timestamp):
     else:
         sign = 0     
 
-    timepassed=getTimePassed(timestamp)
+    timepassed=time_difference(timestamp)
     rating=round(sign*order+timepassed/45000,7)        
 
     return rating
-
