@@ -95,6 +95,13 @@ class Feed(ListView):
     ordering = ['-rating']
 
 
+class Idea(DetailView): 
+    model = Lightbulb
+    template_name = 'LB/idea.html'
+    context_object_name = "idea"
+    pk_url_kwarg = "id_number"
+
+
 def send_proposal(request, id_number):
     pass
 
@@ -116,10 +123,6 @@ def reply(request, id_number):
 
 
 def delete_message(request, id_number):
-    pass
-
-
-def idea(request, id_number):
     pass
 
 

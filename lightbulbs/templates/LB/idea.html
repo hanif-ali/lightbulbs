@@ -1,0 +1,10 @@
+<h3>{{idea.title}}</h3>
+<h4>Creator:{{idea.creator}}</h4>
+<p>{{idea.description}}</p>
+Proposals
+<ul>
+{% for proposal in idea.proposals.all %}
+    {{proposal}}
+{% endfor %}
+</ul
+
