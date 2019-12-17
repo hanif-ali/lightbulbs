@@ -1,5 +1,5 @@
 from django import forms
-from .models import LBUser
+from .models import LBUser, Lightbulb
 from django.contrib.auth import authenticate
 
 
@@ -44,10 +44,12 @@ class LoginForm(forms.Form):
 
 
 
-class LBCreationForm(forms.Form):
-    category = forms.CharField(max_length=20)
-    title = forms.CharField(max_length=50)
-    description = forms.TextInput()
+class LBCreationForm(forms.ModelForm):
+
+    class Meta:
+        model = Lightbulb
+        fields = ["title", "category", "description"]
+
 
 
 class ProposalForm(forms.Form):

@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from .rating import getRating
 import time
+from django.urls import reverse
 
 # Create your models here.
 
@@ -50,6 +51,10 @@ class Lightbulb(models.Model):
 
     def __str__(self):
         return f"{self.creator} - {self.title}"
+
+    def get_absolute_url(self):
+        return reverse("idea", kwargs={"id_number": self.id})
+    
 
 
 class Proposal(models.Model):

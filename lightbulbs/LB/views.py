@@ -142,8 +142,18 @@ def edit_profile(request):
     pass
 
 
-def create_idea(request, id_number):
-    pass
+
+class CreateIdea(LoginRequiredMixin, CreateView):
+    template_name = "LB/feed.html"
+    form_class = LBCreationForm
+
+    def form_valid(self, form):
+        idea = form.save(commit=False)
+        idea.creator = self.request.user
+        idea.save()
+        messages.success(self.request, "The Lightbulb was created successfully")
+        return redirect(idea.get_absolute_url())
+
 
 
 class DeleteIdea(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
