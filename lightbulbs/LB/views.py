@@ -8,6 +8,13 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
+# Import models
+from .models import LBUser, Lightbulb, Message, Notification, Proposal
+
+# For class based Views
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
 
 def create_user(first_name, last_name, email, username, password, age):
     user = LBUser(first_name=first_name, last_name=last_name, email=email, username=username, age=age)
@@ -81,10 +88,11 @@ def logout_view(request):
 
 
 
-@login_required(login_url="/login")
-def feed(request):
-    return render(request, "LB/feed.html", {})
-
+class Feed(ListView):
+    model = Lightbulb
+    template_name = 'LB/feed.html'
+    context_object_name = 'ideas'
+    ordering = ['-rating']
 
 
 def send_proposal(request, id_number):

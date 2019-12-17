@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from .rating import getRating
+import time
 
 # Create your models here.
 
@@ -7,6 +9,8 @@ from django.contrib.auth.models import AbstractUser
 class LBUser(AbstractUser):
     """LightBulb User Model. Extends the default django User Model to act as an
     Authentication Model. Additional Fields are defined"""
+
+
 
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
@@ -23,7 +27,6 @@ class LBUser(AbstractUser):
     downvotes = models.ManyToManyField('Lightbulb', related_name="downvoters")
     stars = models.ManyToManyField('Lightbulb', related_name="starrers")
     
-    
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
@@ -39,6 +42,11 @@ class Lightbulb(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
     category = models.CharField(max_length=20)
+    rating = models.DecimalField( decimal_places=6,max_digits=12)
+    
+    def save(self, *args, **kwargs):
+        self.rating = getRating(self.upvotes.count(), self.downvotes.count(), time.time())
+        super(LBUser, self).save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.creator} - {self.title}"

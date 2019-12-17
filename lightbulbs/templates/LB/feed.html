@@ -1,1 +1,7 @@
 <a href="{% url 'logout' %}">Logout</a>
+<br>
+
+{% for idea in ideas %}
+    <a href="{% url 'idea' id_number=idea.id %}" >{{idea}}
+    <br>
+{% endfor %}
