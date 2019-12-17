@@ -14,7 +14,8 @@ class LBUser(AbstractUser):
     profession = models.CharField(max_length=30, blank=True)
     bio = models.TextField(null=True, blank=True)
     age = models.PositiveSmallIntegerField()
-    skills = models.TextField(null=True, blank=True)     # Delimiter separated Values
+    skills = models.TextField(null=True, blank=True)     # Delimiter separated 
+    location=models.TextField(null=True, blank=True,help_text="Tell us in which city do you live")
     contact_number = models.PositiveIntegerField(null=True, blank=True)
     linkedin = models.URLField(null=True, blank=True)
     facebook = models.URLField(null=True, blank=True)
@@ -22,6 +23,7 @@ class LBUser(AbstractUser):
     upvotes = models.ManyToManyField('Lightbulb', related_name="upvoters")
     downvotes = models.ManyToManyField('Lightbulb', related_name="downvoters")
     stars = models.ManyToManyField('Lightbulb', related_name="starrers")
+    timestamp=models.DateTimeField(auto_now_add=True)#for how long the user has been using lightbulbs
     
     
     def __str__(self):
