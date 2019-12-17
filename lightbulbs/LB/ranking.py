@@ -7,19 +7,12 @@ def getRating(upvotes,downvotes,timestamp):
         startingtime=datetime(2000,1,1)
         return timestamp-datetime.timestamp(startingtime)
    
-    def getScore(upvotes,downvotes):
-        return upvotes - downvotes
+    score = upvotes-downvotes
 
-    score = getScore(upvotes, downvotes)
-    order = log(max ( abs (score), 1), 10)
-    if score > 0:
-        sign = 1
-    elif score < 0:
-        sign = -1
-    else:
-        sign = 0     
+    order = log(max(abs(score), 1), 10)
 
-    timepassed=time_difference(timestamp)
-    rating=round(sign*order+timepassed/45000,7)        
+    timepassed = time_difference(timestamp)
+
+    rating = round(abs(order)+timepassed/45000,7)        
 
     return rating
