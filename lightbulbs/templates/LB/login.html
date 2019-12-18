@@ -1,18 +1,34 @@
-{% extends 'LB/home_base.html' %}
+{% extends 'LB/partials/home_base.html' %}
+{% load widget_tweaks %}
 
 {% block content %}
 
   <div class="login-form-wrapper">
-      <form class="text-center border border-light p-5" action="#!">
+      <form class="text-center border border-light p-5" action="{% url 'login' %}" method="post">
+        {% csrf_token %}
 
           <p class="h4 mb-4">Log In</p>
+          {% for error in form.non_field_errors %}
+            <div class="alert alert-danger">{{error}}</div>
+          {% endfor %}
 
+          {% for field in form %}
           <!-- E-mail -->
-          <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+          <div class="input-group mb-4">
+            {% if field.errors %}
 
-          <!-- Password -->
-          <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+              {% render_field field class="form-control text-center is-invalid" %}
+              {% for error in field.errors %}
+                <div class="invalid-feedback">{{error}}</div>
+              {% endfor %}
 
+            {% else %}
+              {% render_field field class="form-control text-center" %}
+            {% endif %}
+          </div>
+
+
+          {% endfor %}
 
           <!-- Sign up button -->
           <button class="btn btn-info my-4 btn-block" type="submit">Sign in</button>

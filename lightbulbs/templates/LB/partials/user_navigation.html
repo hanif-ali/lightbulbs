@@ -1,0 +1,21 @@
+<div class="bg-dark navbar-dark text-white">
+<div class="container">
+    <nav class="navbar px-0 navbar-expand-lg navbar-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse">
+        <div class="navbar-nav" id="user-navigation-links">
+            <a href="#" class="navbar-brand text-white">
+                <span class="fa fa-lightbulb text-warning mx-2"></span>
+            LightBulbs</a>
+            <a href="{% url 'feed' %}" class="nav-link" data-linkto="home">Home</a>
+            <a href="{% url 'profile'%}" class="text-decoration-none nav-link" data-linkto="profile">My Profile</a> 
+            <a href="#" class="text-decoration-none nav-link" data-linkto="settings">Settings</a>
+            <a href="{% url 'logout'%}" class="text-decoration-none nav-link" data-linkto="logout">Log Out</a>
+        </div>
+    </div>
+    </nav>
+
+</div>
+</div>
