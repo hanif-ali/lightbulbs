@@ -1,19 +1,52 @@
-<form action="{% url 'register' %}" method="POST">
-{% csrf_token %}
+{% extends 'LB/home_base.html' %}
+{% block content%}
 
-    {% for error in form.non_field_errors %}
-        {{error}}
-    {% endfor %}
+  <div class="login-form-wrapper">
+      <form class="text-center border border-light p-5" action="#!">
 
-    {% for field in form %}
-        {% for error in field.errors %}
-            {{error}}
-        {% endfor%}
+          <p class="h4 mb-4">Sign up</p>
 
-        {{field.label}}:
-        {{field}}
-        <br>
-    {% endfor %}
+          <div class="form-row mb-4">
+              <div class="col">
+                  <!-- First name -->
+                  <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
+              </div>
+              <div class="col">
+                  <!-- Last name -->
+                  <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
+              </div>
+          </div>
 
-    <input type="submit">
-</form>
+          <!-- E-mail -->
+          <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+
+          <!-- Password -->
+          <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+
+
+          <!-- Sign up button -->
+          <button class="btn btn-info my-4 btn-block" type="submit">Sign Up</button>
+
+          <!-- Social register -->
+          <p>or sign up with:</p>
+
+          <a href="#" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
+          <a href="#" class="mx-2" role="button"><i class="fab fa-twitter light-blue-text"></i></a>
+          <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in light-blue-text"></i></a>
+          <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text"></i></a>
+
+          <hr>
+
+          <!-- Terms of service -->
+          <p>By clicking
+              <em>Sign up</em> you agree to our
+              <a href="" target="_blank">terms of service</a>
+
+      </form>
+  </div>
+
+{% endblock%}
+
+{% block additional_scripts %}
+  <script>activate_navigation_link("register");</script>
+{% endblock %}

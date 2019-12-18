@@ -1,21 +1,40 @@
-{% load widget_tweaks %}
+{% extends 'LB/home_base.html' %}
 
-<form action="{% url 'login' %}" method="post">
-    {% csrf_token %}
+{% block content %}
 
-    {% for error in form.non_field_errors %}
-        <p>{{error}}</p>
-    {% endfor%}
+  <div class="login-form-wrapper">
+      <form class="text-center border border-light p-5" action="#!">
 
-    {% for field in form %}
-        {% for error in field.errors %}
-            {{error}}
-        {% endfor %}
-        {{field.label}}
-        {% render_field field class="form-control" %}
-        <br>
-    {% endfor %}
+          <p class="h4 mb-4">Log In</p>
 
-    <input type="submit">
+          <!-- E-mail -->
+          <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
 
-</form>
+          <!-- Password -->
+          <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+
+
+          <!-- Sign up button -->
+          <button class="btn btn-info my-4 btn-block" type="submit">Sign in</button>
+
+          <!-- Social register -->
+          <p>or Sign In with:</p>
+
+          <a href="#" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
+          <a href="#" class="mx-2" role="button"><i class="fab fa-twitter light-blue-text"></i></a>
+          <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in light-blue-text"></i></a>
+          <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text"></i></a>
+
+          <hr>
+
+          <!-- Register -->
+          <p>If you do not have an account, <a href="signup.html">Sign Up</a> first</p>
+
+      </form>
+  </div>
+
+{% endblock %}
+
+{% block additional_scripts %}
+  <script>activate_navigation_link("login");</script>
+{% endblock %}

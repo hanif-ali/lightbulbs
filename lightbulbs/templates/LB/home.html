@@ -1,1 +1,42 @@
-<a href="{% url 'login' %}">Login</a>
+{% extends 'LB/home_base.html' %}
+{% block content %}
+
+  <div class="jumbotron bg-wizardry bg-dark text-white mb-0 radius-0">
+    <div class="container">
+
+        <h1 class="display-1 text-light">Lightbulbs
+          <span class="fa fa-lightbulb text-warning display-icon"></span>
+        </h1>
+        <span class="lead">An idea-sharing Platform</span>
+
+        <div class="mt-4">
+          <a href="{% url 'login' %}"
+            class="btn btn-pill btn-wide btn-warning btn-lg my-2">
+            <span>Login</span>
+          </a>
+
+          <a href="{% url 'register' %}"
+            class="btn btn-pill btn-wide btn-outline-light btn-hover-text-dark btn-lg my-2">
+            <span>Sign Up</span>
+          </a>
+        </div>
+
+    </div>
+  </div>
+
+
+
+  <div class="container py-5">
+    <h1>Welcome to Lightbulbs</h1>
+
+    <p>Lightbulbs is an open-source idea-sharing platoform developed in Django. If you are interested in contributing to the project, please visit our Github repository:<br>
+      <a href="https://github.com/hanif-ali/lightbulbs">https://github.com/hanif-ali/lightbulbs</a></p>
+
+    
+  </div>
+
+{% endblock %}
+
+{% block additional_scripts %}
+  <script>activate_navigation_link("home");</script>
+{% endblock %}

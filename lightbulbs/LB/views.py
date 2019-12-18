@@ -352,3 +352,7 @@ class EditProfile(LoginRequiredMixin, UpdateView):
 
     def get_object(self):
         return get_object_or_404(LBUser, id=self.request.user.id)
+
+
+def test_view(request):
+    return render(request, "LB/home.html", {})
