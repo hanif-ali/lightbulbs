@@ -100,3 +100,15 @@ notification_delete_buttons.forEach(button => {
                 })
             })
     })
+
+
+var message_delete_buttons = document.querySelectorAll(".message-delete")
+message_delete_buttons.forEach(button => {
+    button.addEventListener('click', event => {
+        message_id = button.dataset.message
+        confirmation = confirm("Do you want to delete this message?")
+        if(confirmation){
+            document.location.replace(`http://${window.location.hostname}:${window.location.port}/inbox/delete/${message_id}`)
+        }
+    })
+})

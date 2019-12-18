@@ -3,17 +3,19 @@
 
 {% block content%}
 
-{% include 'LB/partials/django_messages.html' %}
 
 {% for idea in ideas %}
+
   <div class="col-md-12">
     <div class="card feed-item">
+
       <div class="card-header">
         <a class="card-title feed-item-title">{{idea.title}}</a>
         <div class="badge badge-secondary">
           {{idea.category}}
         </div>
       </div>
+
       <div class="card-body">
         
         <p class="card-text feed-item-description">

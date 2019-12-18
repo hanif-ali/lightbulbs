@@ -3,17 +3,24 @@
 
 {% block content%}
 
-{% include 'LB/partials/django_messages.html' %}
-
 
 {% for notification in notifications %}
 
+<div class="col-md-12">
   <div class="alert alert-primary" style="width:100%">
       <a href="{{notification.link}}">{{notification.message}}</a>
       <button type="button" data-notification="{{notification.id}}" class="close notification-delete"  aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
   </div>
+</div>
+
+{% empty %}
+<div class="col-md-12">
+  <div class="alert alert-info">
+  No Notifications to show.
+  </div>
+</div>
 
 {% endfor %}
 

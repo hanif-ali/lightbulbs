@@ -33,6 +33,10 @@
 
         <div class="col-md-9">
 
+          <div class="col-md-12">
+            {% include 'LB/partials/django_messages.html' %}
+          </div>
+
           {% block content %}{% endblock %}
 
         </div>

@@ -93,7 +93,7 @@ class Feed(ListView, LoginRequiredMixin):
     template_name = 'LB/feed.html'
     context_object_name = 'ideas'
     ordering = ['-rating']
-    paginate_by = 1
+    paginate_by = 6
 
 
 class Idea(DetailView, LoginRequiredMixin): 
@@ -156,7 +156,7 @@ class DeleteNotification(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class Inbox(LoginRequiredMixin, ListView):
     model = Message
     template_name = "LB/inbox.html"
-    context_object_name = "messages"
+    context_object_name = "inbox_messages"
 
     def get_queryset(self):
         queryset = Message.objects.filter(receiver=self.request.user)
@@ -176,7 +176,7 @@ class DeleteMessage(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
     def get(self, *args, **kwargs):
-        messages.warning(self.request, "The message was deleted.")
+        messages.success(self.request, "The message was deleted.")
         self.message.delete()
         return redirect(self.success_url)
 
