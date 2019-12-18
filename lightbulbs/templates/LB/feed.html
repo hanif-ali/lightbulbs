@@ -6,39 +6,7 @@
 
 {% for idea in ideas %}
 
-  <div class="col-md-12">
-    <div class="card feed-item">
-
-      <div class="card-header">
-        <a class="card-title feed-item-title">{{idea.title}}</a>
-        <div class="badge badge-secondary">
-          {{idea.category}}
-        </div>
-      </div>
-
-      <div class="card-body">
-        
-        <p class="card-text feed-item-description">
-          {{idea.description}}
-        </p>
-
-      </div>
-      <div class="card-footer feet-item-footer">
-        <div style="float:left" class="footer-left">
-          <small>
-            Created by <b>{{idea.creator}}</b> on <b>{{idea.timestamp}}</b></b>
-          </small> 
-        </div>
-        <div style="float:right" class="footer-right">
-          <a href="{% url 'send-proposal' id_number=idea.id %}" class="send-proposal">Send Proposal</a>
-          <button data-idea="{{idea.id}}" class="fas fa-arrow-up upvote-button"></button>
-          <button data-idea="{{idea.id}}" class="fas fa-arrow-down downvote-button"></button>
-          <button data-idea="{{idea.id}}" class="far fa-star star-button"></button>
-        
-        </div>
-      </div>
-    </div>
-  </div>
+  {% include 'LB/partials/feed_item.html' %}
 
 
 {% empty %}

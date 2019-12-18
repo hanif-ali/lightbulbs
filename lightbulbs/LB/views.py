@@ -208,11 +208,14 @@ class SendMessage(LoginRequiredMixin, FormView):
 
 
 
-@login_required(login_url=reverse_lazy("login"))
-def my_ideas(request):
-    ideas = request.user.lightbulbs.all()
-    stars = request.user.stars.all()
-    return render(request, "LB/myideas.html", locals())
+class MyIdeas(ListView, LoginRequiredMixin):
+    def get_queryset(self):
+        queryset = Lightbulb.objects.filter(creator=self.request.user)
+        return queryset
+        
+    template_name = 'LB/my_ideas.html'
+    context_object_name = 'ideas'
+    paginate_by = 1
 
 
 
