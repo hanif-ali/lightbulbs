@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import RegistrationForm, LoginForm, LBCreationForm, ProposalForm, MessageForm, EditProfileForm
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from .models import LBUser
 from django.http import HttpResponse, JsonResponse
@@ -214,14 +214,6 @@ def my_ideas(request):
     return render(request, "LB/myideas.html", locals())
 
 
-def profile(request):
-    pass
-
-
-def edit_profile(request):
-    pass
-
-
 
 class CreateIdea(LoginRequiredMixin, CreateView):
     template_name = "LB/feed.html"
@@ -337,3 +329,26 @@ def star(request, id_number):
         idea.starrers.add(request.user)
         idea.save()
         return JsonResponse({"status": "starred"})
+
+from .models import LBUser
+from django.views.generic import DetailView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
+
+class Profile(DetailView):
+    template_name = 'LB/profile.html'
+    context_object_name = "data"
+
+    def get_object(self):
+        return get_object_or_404(LBUser, id=self.request.user.id)
+
+
+
+class EditProfile(LoginRequiredMixin, UpdateView):
+    form = EditProfileForm
+    template_name = 'LB/edit_profile.html'
+    fields = ['username','first_name','last_name', 'email','age','contact_number','profession','bio', 'skills', 'linkedin', 'facebook', 'github']
+    success_url = reverse_lazy("profile")
+
+    def get_object(self):
+        return get_object_or_404(LBUser, id=self.request.user.id)

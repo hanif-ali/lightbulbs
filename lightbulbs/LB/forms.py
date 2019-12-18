@@ -69,15 +69,8 @@ class MessageForm(forms.ModelForm):
     
 
 
-class EditProfileForm(forms.Form):
-    first_name = forms.CharField(max_length=20)
-    last_name = forms.CharField(max_length=20)
-    description = forms.CharField(max_length=30, empty_value=True)
-    profession = forms.CharField(max_length=30)
-    bio = forms.TextInput()
-    age = forms.NumberInput()
-    skills = forms.TextInput()
-    contact_number = forms.NumberInput()
-    linkedin = forms.URLInput()
-    facebook = forms.URLInput()
-    github = forms.URLInput()
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = LBUser
+        fields = ['first_name', 'last_name', 'description', 'profession', 'bio', 'age', 'skills',
+            'contact_number', 'linkedin', 'facebook', 'github', ]
