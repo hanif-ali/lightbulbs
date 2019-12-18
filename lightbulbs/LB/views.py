@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
 from .models import LBUser
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
@@ -29,7 +29,7 @@ def register(request):
 
     if request.user.is_authenticated:     # Redirect if already logged in 
         messages.info(request, "You are already logged in.")
-        return redirect(reverse("feed"))
+        return redirect(reverse_lazy("feed"))
 
 
     if request.method == 'POST':
@@ -44,7 +44,7 @@ def register(request):
             user = create_user(first_name=first_name, last_name=last_name, email=email, username=username, password=password, age=age)
             login(request, user)
             messages.success(request, 'Your Account has been created! Edit your Profile Now.')
-            return redirect(reverse("edit-profile"))  # Profile Edit Page
+            return redirect(reverse_lazy("edit-profile"))  # Profile Edit Page
 
     else:
         form = RegistrationForm()
@@ -55,7 +55,7 @@ def register(request):
 def homepage(request):
     if request.user.is_authenticated:     # Redirect if already logged in 
         messages.info(request, "You are already logged in.")
-        return redirect(reverse("feed"))
+        return redirect(reverse_lazy("feed"))
 
 
     return render(request, "LB/home.html", {})
@@ -64,7 +64,7 @@ def homepage(request):
 def login_view(request):
     if request.user.is_authenticated:     # Redirect if already logged in 
         messages.info(request, "You are already logged in.")
-        return redirect(reverse("feed"))
+        return redirect(reverse_lazy("feed"))
 
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -72,7 +72,7 @@ def login_view(request):
             user = form.login(request)
             if user:
                 login(request, user)
-                return redirect(reverse("feed"))
+                return redirect(reverse_lazy("feed"))
 
 
     else:
@@ -84,7 +84,7 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     messages.success(request, "Logged Out Successfully")
-    return redirect(reverse("login"))
+    return redirect(reverse_lazy("login"))
 
 
 
@@ -123,7 +123,7 @@ class SendProposal(LoginRequiredMixin, FormView):
         proposal.sender = self.request.user
         proposal.save()
         messages.success(self.request, "Your Proposal has been sent.")
-        return redirect(reverse("feed"))
+        return redirect(reverse_lazy("feed"))
 
 
 
@@ -203,7 +203,7 @@ class SendMessage(LoginRequiredMixin, FormView):
         message.receiver = LBUser.objects.get(id=form.cleaned_data['receiver_id'])
         message.save()
         messages.success(self.request, "Message Sent")
-        return redirect(reverse("inbox"))
+        return redirect(reverse_lazy("inbox"))
 
 
 
@@ -299,13 +299,41 @@ class DeleteSentProposal(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return redirect(self.success_url)
 
 
+@login_required(login_url=reverse_lazy("login"))
 def upvote(request, id_number):
-    pass
+    idea = Lightbulb.objects.get(id=id_number)
+    if request.user in idea.upvoters.all():
+        idea.upvoters.remove(request.user)
+        idea.save()
+        return JsonResponse({"status": "unupvoted"})
+    else:
+        idea.upvoters.add(request.user)
+        idea.save()
+        return JsonResponse({"status": "upvoted"})
 
 
+@login_required(login_url=reverse_lazy("login"))
 def downvote(request, id_number):
-    pass
+    idea = Lightbulb.objects.get(id=id_number)
+    if request.user in idea.downvoters.all():
+        idea.downvoters.remove(request.user)
+        idea.save()
+        return JsonResponse({"status": "undownvoted"})
+    else:
+        idea.downvoters.add(request.user)
+        idea.save()
+        return JsonResponse({"status": "downvoted"})
 
 
+
+@login_required(login_url=reverse_lazy("login"))
 def star(request, id_number):
-    pass
+    idea = Lightbulb.objects.get(id=id_number)
+    if request.user in idea.starrers.all():
+        idea.starrers.remove(request.user)
+        idea.save()
+        return JsonResponse({"status": "unstarred"})
+    else:
+        idea.starrers.add(request.user)
+        idea.save()
+        return JsonResponse({"status": "starred"})
