@@ -1,0 +1,48 @@
+{% extends 'LB/partials/feed_base.html' %}
+{% load static %}
+
+{% block content%}
+
+{% for proposal in proposals %}
+
+  <div class="col-md-12">
+    <div class="card sent">
+        <div class="card-header sent-header">
+            {{proposal.lightbulb.title}} <small>by {{proposal.lightbulb.creator}}</small>
+        </div>
+      <div class="card-body">
+        <p class="card-text sent-message">
+            {{proposal.message}}
+        </p>
+      </div>
+      <div class="card-footer sent-footer">
+          <div class="sent-timestamp">
+              <small>Sent on <strong>{{proposal.timestamp}}</strong></small>
+          </div>
+        <div class="sent-controls">
+          <span data-proposal="{{proposal.id}}" class="fa fa-trash sent-delete"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% empty %}
+<div class="col-md-12">
+  <div class="alert alert-info">
+  No Sent Proposals to show.
+  </div>
+</div>
+
+{% endfor %}
+
+{% endblock %}
+
+
+{% block additional_scripts %}
+  <script>
+    activate_navigation_link("home");
+    activate_side_navigation_link("sent-proposals");
+  </script>
+{% endblock %}

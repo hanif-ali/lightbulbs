@@ -112,3 +112,16 @@ message_delete_buttons.forEach(button => {
         }
     })
 })
+
+
+var proposal_delete_buttons = document.querySelectorAll(".sent-delete")
+
+proposal_delete_buttons.forEach(button => {
+    button.addEventListener('click', event => {
+        proposal_id = button.dataset.proposal
+        confirmation = confirm("Are you sure you want to delete the sent proposal?")
+        if(confirmation){
+            document.location.replace(`http://${window.location.hostname}:${window.location.port}/me/sent/delete/${proposal_id}`)
+        }
+    })
+})
