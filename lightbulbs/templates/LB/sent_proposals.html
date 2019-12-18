@@ -1,0 +1,12 @@
+{% for proposal in proposals %}
+<div class="prop">
+    <a href="{% url 'idea' id_number=proposal.lightbulb.id %}">
+        {{proposal.lightbulb}}
+    </a><br>
+    {{proposal.message}}
+    <br>
+    {{proposal.timestamp}}
+    <a href="{% url 'delete-sent-proposal' id_number=proposal.id %}">Delete</a>
+</div>
+
+{% endfor %}
