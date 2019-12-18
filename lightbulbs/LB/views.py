@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import RegistrationForm, LoginForm, LBCreationForm, ProposalForm, MessageFrom, EditProfileForm
+from .forms import RegistrationForm, LoginForm, LBCreationForm, ProposalForm, MessageForm, EditProfileForm
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 from .models import LBUser, Lightbulb, Message, Notification, Proposal
 
 # For class based Views
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
@@ -159,8 +159,25 @@ class DeleteMessage(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return redirect(self.success_url)
 
 
-class SendMessage(LoginRequiredMixin, CreateView):
-    pass
+
+class SendMessage(LoginRequiredMixin, FormView):
+    template_name = "LB/send_message.html"
+    form_class = MessageForm
+
+    def get(self, *args, **kwargs):
+        id_number = kwargs["id_number"]
+        receiver = LBUser.objects.get(id=id_number)
+        form = MessageForm({"receiver_id": receiver.id})
+        return render(self.request, self.template_name, locals())
+
+    def form_valid(self, form):
+        message = form.save(commit=False)
+        message.sender = self.request.user
+        message.receiver = LBUser.objects.get(id=form.cleaned_data['receiver_id'])
+        message.save()
+        messages.success(self.request, "Message Sent")
+        return redirect(reverse("inbox"))
+
 
 
 @login_required(login_url=reverse_lazy("login"))

@@ -1,5 +1,5 @@
 from django import forms
-from .models import LBUser, Lightbulb
+from .models import LBUser, Lightbulb, Message
 from django.contrib.auth import authenticate
 
 
@@ -56,8 +56,13 @@ class ProposalForm(forms.Form):
     message = forms.TextInput()
 
 
-class MessageFrom(forms.Form):
-    message = forms.TextInput()
+class MessageForm(forms.ModelForm):
+    receiver_id = forms.IntegerField()
+
+    class Meta:
+        model = Message
+        fields = ['message']
+    
 
 
 class EditProfileForm(forms.Form):
