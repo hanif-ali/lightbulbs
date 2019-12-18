@@ -6,6 +6,7 @@
     {{proposal.message}}
     <br>
     {{proposal.timestamp}}
+    <a href="{% url 'delete-sent-proposal' id_number=proposal.id %}">Delete</a>
 </div>
 
 {% endfor %}

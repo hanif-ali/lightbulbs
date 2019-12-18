@@ -281,8 +281,22 @@ class SentProposals(LoginRequiredMixin, ListView):
 
 
 
-def delete_sent(request, id_number):
-    pass
+class DeleteSentProposal(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Proposal
+    pk_url_kwarg = "id_number"
+    success_url = reverse_lazy("sent-proposals")
+
+    
+    def test_func(self):
+        self.proposal = self.get_object()
+        if self.proposal.sender == self.request.user:
+            return True
+        return False
+
+    def get(self, *args, **kwargs):
+        messages.warning(self.request, "The proposal was deleted.")
+        self.proposal.delete()
+        return redirect(self.success_url)
 
 
 def upvote(request, id_number):
