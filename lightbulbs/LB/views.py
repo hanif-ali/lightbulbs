@@ -93,6 +93,7 @@ class Feed(ListView, LoginRequiredMixin):
     template_name = 'LB/feed.html'
     context_object_name = 'ideas'
     ordering = ['-rating']
+    paginate_by = 1
 
 
 class Idea(DetailView, LoginRequiredMixin): 

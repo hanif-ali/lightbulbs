@@ -38,12 +38,20 @@
     </div>
   </div>
 
+
 {% empty %}
-  <div class="alert alert-info">No Ideas to show</div>
+  <div class="col-md-12">
+    <div class="alert alert-info">No Ideas to show</div>
+  </div>
 {% endfor%}
+
+<div class="col-md-12">
+  {% include 'LB/partials/pagination.html' %}
+</div>
 
 
 {% endblock %}
+
 
 {% block additional_scripts %}
   <script>
