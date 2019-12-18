@@ -102,8 +102,29 @@ class Idea(DetailView, LoginRequiredMixin):
     pk_url_kwarg = "id_number"
 
 
-def send_proposal(request, id_number):
-    pass
+class SendProposal(LoginRequiredMixin, FormView):
+    template_name = "LB/send_proposal.html"
+    form_class = ProposalForm
+
+    def get(self, *args, **kwargs):
+        id_number = kwargs["id_number"]
+        lightbulb = Lightbulb.objects.get(id=id_number)
+        form = ProposalForm({"lightbulb_id": lightbulb.id})
+        return render(self.request, self.template_name, locals())
+
+    def form_invalid(self, form, *args, **kwargs):
+        print(form.errors)
+        return HttpResponse("Inavlid form")
+
+    def form_valid(self, form):
+        print("Validating Right Now")
+        proposal = form.save(commit=False)
+        proposal.lightbulb = Lightbulb.objects.get(id=form.cleaned_data['lightbulb_id'])
+        proposal.sender = self.request.user
+        proposal.save()
+        messages.success(self.request, "Your Proposal has been sent.")
+        return redirect(reverse("feed"))
+
 
 
 class Notifications(LoginRequiredMixin, ListView):
@@ -169,6 +190,12 @@ class SendMessage(LoginRequiredMixin, FormView):
         receiver = LBUser.objects.get(id=id_number)
         form = MessageForm({"receiver_id": receiver.id})
         return render(self.request, self.template_name, locals())
+
+
+    def form_invalid(self, form, *args, **kwargs):
+        print(form.errors)
+        return HttpResponse("Inavlid form")
+
 
     def form_valid(self, form):
         message = form.save(commit=False)
