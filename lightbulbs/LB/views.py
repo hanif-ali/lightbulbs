@@ -271,8 +271,14 @@ class EditIdea(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return False
 
 
-def sent_proposals(request):
-    pass
+class SentProposals(LoginRequiredMixin, ListView):
+    template_name = "LB/sent_proposals.html"
+    context_object_name = "proposals"
+
+    def get_queryset(self):
+        queryset = Proposal.objects.filter(sender=self.request.user)
+        return queryset
+
 
 
 def delete_sent(request, id_number):
