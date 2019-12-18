@@ -15,14 +15,14 @@
             Create Lightbulb
         </button>
 
-        <a href="#" class="list-group-item list-group-item-action" data-linkto="feed">Feed</a>
-        <a href="#" data-linkto="notifications" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        <a href="{% url 'feed' %}" class="list-group-item list-group-item-action" data-linkto="feed">Feed</a>
+        <a href="{% url 'notifications' %}" data-linkto="notifications" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
             Notifications
         </a>
-        <a href="#" data-linkto="inbox" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        <a href="{% url 'inbox' %}" data-linkto="inbox" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
             Inbox
         </a>
-        <a href="#" data-linkto="sent-proposals" class="list-group-item list-group-item-action">Sent Proposals</a>
-        <a href="#" data-linkto="my-ideas" class="list-group-item list-group-item-action">My Ideas</a>
+        <a href="{% url 'sent-proposals' %}" data-linkto="sent-proposals" class="list-group-item list-group-item-action">Sent Proposals</a>
+        <a href="{% url 'my-ideas' %}" data-linkto="my-ideas" class="list-group-item list-group-item-action">My Ideas</a>
     </div>
 </div>

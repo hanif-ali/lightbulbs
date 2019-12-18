@@ -83,3 +83,20 @@ function activate_side_navigation_link(linkto){
     })
 
 }
+
+
+var notification_delete_buttons = document.querySelectorAll(".notification-delete")
+notification_delete_buttons.forEach(button => {
+    button.addEventListener('click', (event)=>{
+
+        var notification_id = button.dataset.notification;
+        var url = `http://${window.location.hostname}:${window.location.port}/notifications/delete/${notification_id}`  
+        fetch(url).then(res => res.json())
+                .then(data => {
+                    if(data["success"]){
+                        alert_div = button.parentElement
+                        alert_div.remove()
+                    }
+                })
+            })
+    })

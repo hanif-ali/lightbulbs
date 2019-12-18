@@ -149,7 +149,7 @@ class DeleteNotification(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def get(self, *args, **kwargs):
         self.notification.delete()
-        return HttpResponse("success")
+        return JsonResponse({"success": True})
     
 
 
