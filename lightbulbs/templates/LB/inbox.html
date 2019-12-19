@@ -18,7 +18,9 @@
   <div class="col-md-12">
     <div class="card message">
         <div class="card-header message-header">
-            From: {{message.sender}}
+            From:  <b><a href="{% url 'user-profile' id_number=message.sender.id %}"> {{message.sender}}</a></b>
+            &emsp;
+            To:  <b><a href="{% url 'user-profile' id_number=message.receiver.id %}"> {{message.receiver}}</a></b>
         </div>
       <div class="card-body">
         <p class="card-text message-text">

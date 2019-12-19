@@ -30,7 +30,9 @@
       <div class="card-footer feet-item-footer">
         <div style="float:left" class="footer-left">
           <small>
-            Created by <b>{{idea.creator}}</b> on <b>{{idea.timestamp}}</b></b>
+            Created by 
+              <b><a href="{% url 'user-profile' id_number=idea.creator.id %}"> {{idea.creator}}</a></b>
+            on <b>{{idea.timestamp}}</b></b>
           </small> 
         </div>
         <div style="float:right" class="footer-right">
