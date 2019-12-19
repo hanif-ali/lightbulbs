@@ -1,0 +1,42 @@
+{% extends 'LB/partials/feed_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content%}
+
+  <div class="col-md-12">
+
+    <h5>Send Message</h5>
+    <hr>
+
+
+    <form action="{% url 'send-message' id_number=receiver.id%}" method="post">
+    {% csrf_token %}
+
+        <div class="card message">
+            <div class="card-header message-header">
+                To: {{receiver}}
+            </div>
+        <div class="card-body p-0">
+            <p class="card-text message-text">
+            {% render_field form.message class="form-control m-0" placeholder="Type your message" %}
+            </p>
+        </div>
+        <div class="card-footer message-footer">
+            {% render_field form.receiver_id %}
+            <input type="submit" value="Send" class="btn btn-primary">
+        </div>
+        </div>
+    </div>
+    </form>
+</div>
+
+{% endblock %}
+
+
+{% block additional_scripts %}
+  <script>
+    activate_navigation_link("home");
+    activate_side_navigation_link("inbox");
+  </script>
+{% endblock %}

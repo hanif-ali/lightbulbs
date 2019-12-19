@@ -3,6 +3,16 @@
 
 {% block content%}
 
+<style>
+  .message-reply{
+    color: black;
+  }
+  .message-reply:hover{
+    text-decoration: none;
+  }
+
+</style>
+
 {% for message in inbox_messages %}
 
   <div class="col-md-12">
@@ -20,7 +30,7 @@
               <small><strong>{{message.timestamp}}</strong></small>
           </div>
         <div class="message-controls">
-          <span data-message="{{message.sender.id}}" class="fa fa-reply message-reply"></span>
+          <a href="{% url 'send-message' id_number=message.sender.id %}" class="fa fa-reply message-reply"></a>
           <span data-message="{{message.id}}" class="fa fa-trash message-delete"></span>
         </div>
       </div>

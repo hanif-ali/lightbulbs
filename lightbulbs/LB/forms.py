@@ -53,7 +53,6 @@ class LBCreationForm(forms.ModelForm):
         fields = ["title", "category", "description"]
 
 
-
 class ProposalForm(forms.ModelForm):
     lightbulb_id = forms.IntegerField()
     
@@ -63,7 +62,7 @@ class ProposalForm(forms.ModelForm):
 
 
 class MessageForm(forms.ModelForm):
-    receiver_id = forms.IntegerField()
+    receiver_id = forms.IntegerField(widget=forms.HiddenInput)
 
     class Meta:
         model = Message
