@@ -35,6 +35,7 @@ urlpatterns = [
     path("me", LB.Profile.as_view(), name="profile"),
     path("me/edit", LB.EditProfile.as_view(), name="edit-profile"),
     path("me/ideas", LB.MyIdeas.as_view(), name="my-ideas"),
+    path("me/ideas/starred", LB.StarredIdeas.as_view(), name="starred-ideas"),
     path("me/ideas/delete/<int:id_number>", LB.DeleteIdea.as_view(), name="delete-idea"),
     path("me/ideas/create", LB.CreateIdea.as_view(), name="create-idea"),
     path("me/ideas/edit/<int:id_number>", LB.EditIdea.as_view(), name="edit-idea"),

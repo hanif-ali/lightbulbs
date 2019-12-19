@@ -1,0 +1,34 @@
+{% extends 'LB/partials/feed_base.html' %}
+{% load static %}
+
+{% block content%}
+
+<h4>{{idea.title}}</h4>
+
+<h6>Created on {{idea.timestamp}}</h6>
+
+<div class="card p-4 my-4">{{idea.description}}</div>
+
+<h5>Proposals:</h5>
+{% for proposal in idea.proposals.all %}
+    <div class="card my-4">
+        <div class="card-header">
+            {{proposal.sender}}
+            <small>on <strong>{{proposal.timestamp}}</strong></small>
+        
+        </div>
+        <div class="card-body">
+        {{proposal.message}}
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}
+
+
+{% block additional_scripts %}
+  <script>
+    activate_navigation_link("home");
+    activate_side_navigation_link("notifications");
+  </script>
+{% endblock %}

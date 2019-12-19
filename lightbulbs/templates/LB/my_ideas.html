@@ -5,7 +5,7 @@
 
 <div class="nav nav-tabs nav-fill mb-4" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="nav-home-tab" href="{% url "my-ideas" %}">Created</a>
-    <a class="nav-item nav-link" id="nav-profile-tab" href="{% url "my-ideas" %}">Starred</a>
+    <a class="nav-item nav-link" id="nav-profile-tab" href="{% url "starred-ideas" %}">Starred</a>
 </div>
 
 {% for idea in ideas %}

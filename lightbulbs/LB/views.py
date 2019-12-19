@@ -219,6 +219,17 @@ class MyIdeas(ListView, LoginRequiredMixin):
 
 
 
+class StarredIdeas(ListView, LoginRequiredMixin):
+    def get_queryset(self):
+        queryset = self.request.user.stars.all()
+        return queryset
+        
+    template_name = 'LB/starred_ideas.html'
+    context_object_name = 'ideas'
+    paginate_by = 6
+
+
+
 class CreateIdea(LoginRequiredMixin, CreateView):
     template_name = "LB/feed.html"
     form_class = LBCreationForm
