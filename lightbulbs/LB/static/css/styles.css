@@ -1,0 +1,122 @@
+.login-form-wrapper {
+  margin: 20px auto;
+  width: 50%;
+}
+
+.notification {
+  float: right;
+}
+
+.feed-item {
+  margin-bottom: 20px;
+}
+
+.feed-item .footer-right {
+  float: right;
+}
+
+.feed-item .footer-right .send-proposal, .feed-item .footer-right .upvote-button, .feed-item .footer-right .downvote-button, .feed-item .footer-right .star-button {
+  margin-right: 8px;
+}
+
+.feed-item .footer-right .upvote-button, .feed-item .footer-right .downvote-button, .feed-item .footer-right .star-button {
+  border-style: none;
+  background: transparent;
+  outline: none;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
+}
+
+.feed-item .footer-right .upvote-button:hover, .feed-item .footer-right .downvote-button:hover, .feed-item .footer-right .star-button:hover {
+  color: #f5ba1a;
+}
+
+.feed-item .footer-right .send-proposal {
+  text-decoration: none;
+  color: grey;
+}
+
+.feed-item .footer-right .send-proposal:hover {
+  color: black;
+}
+
+.message {
+  margin-bottom: 30px;
+}
+
+.message .message-footer .message-timestamp {
+  float: left;
+}
+
+.message .message-footer .message-controls {
+  float: right;
+}
+
+.message .message-footer .message-controls span {
+  margin: auto 8px;
+}
+
+.message .message-footer .message-controls .message-delete:hover {
+  color: red;
+}
+
+.message .message-footer .message-controls .message-reply:hover {
+  color: #24acfa;
+}
+
+.sent .sent-footer .sent-timestamp {
+  float: left;
+}
+
+.sent .sent-footer .sent-controls {
+  float: right;
+}
+
+.sent .sent-footer .sent-controls .sent-delete:hover {
+  color: red;
+}
+
+.footer-left {
+  float: left;
+}
+
+.footer-right {
+  float: right;
+}
+
+.delete-button, .created-delete-button, .edit-button, .created-edit-button {
+  border-style: none;
+  background: none;
+  margin: 0 6px;
+}
+
+.delete-button:hover, .created-delete-button:hover {
+  color: red;
+}
+
+.edit-button:hover, .created-edit-button:hover {
+  color: #3258c0;
+}
+
+.created {
+  margin-bottom: 10px;
+}
+
+.created .title {
+  color: black;
+  text-decoration: none;
+}
+
+.created .title:hover {
+  color: #2b2929;
+}
+
+.created .created-edit-button {
+  color: black;
+  text-decoration: none;
+}
+
+.created .created-edit-button:hover {
+  color: #3a84af;
+}
+/*# sourceMappingURL=styles.css.map */

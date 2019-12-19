@@ -1,0 +1,62 @@
+{% extends 'LB/partials/feed_base.html' %}
+{% load static %}
+
+{% block content%}
+
+<style>
+  .message-reply{
+    color: black;
+  }
+  .message-reply:hover{
+    text-decoration: none;
+  }
+
+</style>
+
+{% for message in inbox_messages %}
+
+  <div class="col-md-12">
+    <div class="card message">
+        <div class="card-header message-header">
+            From:  <b><a href="{% url 'user-profile' id_number=message.sender.id %}"> {{message.sender}}</a></b>
+            &emsp;
+            To:  <b><a href="{% url 'user-profile' id_number=message.receiver.id %}"> {{message.receiver}}</a></b>
+        </div>
+      <div class="card-body">
+        <p class="card-text message-text">
+          {{message.message}}
+        </p>
+      </div>
+      <div class="card-footer message-footer">
+          <div class="message-timestamp">
+              <small><strong>{{message.timestamp}}</strong></small>
+          </div>
+        <div class="message-controls">
+          <a href="{% url 'send-message' id_number=message.sender.id %}" class="fa fa-reply message-reply"></a>
+          <span data-message="{{message.id}}" class="fa fa-trash message-delete"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% empty %}
+<div class="col-md-12">
+  <div class="alert alert-info">
+  No Messages to show.
+  </div>
+</div>
+
+
+{% endfor%}
+
+
+{% endblock %}
+
+
+{% block additional_scripts %}
+  <script>
+    activate_navigation_link("home");
+    activate_side_navigation_link("inbox");
+  </script>
+{% endblock %}

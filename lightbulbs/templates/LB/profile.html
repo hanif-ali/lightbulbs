@@ -1,0 +1,116 @@
+{% extends 'LB/partials/profile_base.html' %}
+{% load data_tweaks %}
+
+
+{% block content %}
+<div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <h5>
+                                        {{data.first_name}} {{data.last_name}}
+                                        <span class="badge badge-secondary age mx-2">{{data.age}}</span>
+                                    </h5>
+                                    <h6>
+                                        {{data.description | default:"No description added."}}
+                                    </h6>
+                                    <p class="proile-rating">RANKINGS : <span>Not Ranked</span></p>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bio</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        {% if self_profile %}
+                            <a href="{% url 'edit-profile' %}" class="profile-edit-btn btn btn-secondary" name="btnAddMore">Edit Profile</a>
+                        {% else %}
+                            <a href="{% url 'send-message' id_number=data.id %}" class="profile-edit-btn btn btn-secondary" name="btnAddMore">Send Message</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-work">
+                            <p>Links:</p>
+                            <a href="{{data.linkedin|default:"#"}}"><span class="fab fa-linkedin-in"></span> LinkedIn</a><br/>
+                            <a href="{{data.facebook |default:"#"}}"><span class="fab fa-facebook"></span> Facebook</a><br/>
+                            <a href="{{data.github |default:"#"}}"><span class="fab fa-github"></span> Github</a><br/>
+                            <p>SKILLS</p>
+                                {% get_list data.skills as formskills %}
+                                {% for skill in formskills %}
+                                <a class="my-2">{{skill}}</a><br>
+                                {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Username</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{data.username}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{data.first_name}} {{data.last_name}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{data.email|default:"Email not added."}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Contact Number</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{data.contact_number|default:"Contact Number not added."}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Profession</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{data.profession|default:"Profession not added."}}</p>
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                {{data.bio|default:"No bio added."}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>           
+        </div>
+
+{% endblock %}
+{% block additional_scripts%}
+    <script>
+        {% if self_profile %}
+            activate_navigation_link("profile")
+        {% endif %}
+    </script>
+{% endblock %}

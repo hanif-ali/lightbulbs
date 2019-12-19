@@ -1,0 +1,36 @@
+{% extends 'LB/partials/feed_base.html' %}
+{% load static %}
+
+{% block content%}
+
+
+{% for notification in notifications %}
+
+<div class="col-md-12">
+  <div class="alert alert-primary" style="width:100%">
+      <a href="{{notification.link}}">{{notification.message}}</a>
+      <button type="button" data-notification="{{notification.id}}" class="close notification-delete"  aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+</div>
+
+{% empty %}
+<div class="col-md-12">
+  <div class="alert alert-info">
+  No Notifications to show.
+  </div>
+</div>
+
+{% endfor %}
+
+
+{% endblock %}
+
+
+{% block additional_scripts %}
+  <script>
+    activate_navigation_link("home");
+    activate_side_navigation_link("notifications");
+  </script>
+{% endblock %}

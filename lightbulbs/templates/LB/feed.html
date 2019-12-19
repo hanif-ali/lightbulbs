@@ -1,0 +1,31 @@
+{% extends 'LB/partials/feed_base.html' %}
+{% load static %}
+
+{% block content%}
+
+
+{% for idea in ideas %}
+
+  {% include 'LB/partials/feed_item.html' %}
+
+
+{% empty %}
+  <div class="col-md-12">
+    <div class="alert alert-info">No Ideas to show</div>
+  </div>
+{% endfor%}
+
+<div class="col-md-12">
+  {% include 'LB/partials/pagination.html' %}
+</div>
+
+
+{% endblock %}
+
+
+{% block additional_scripts %}
+  <script>
+    activate_navigation_link("home");
+    activate_side_navigation_link("feed");
+  </script>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'LB/partials/home_base.html' %}
+{% block content%}
+
+<div class="modal fade" id="OAuthModal" tabindex="-1" role="dialog" aria-labelledby="createModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Sorry :( </h5>
+      </div>
+      <div class="modal-body">
+        OAuth for Github and LinkedIn are currently in development.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <div class="login-form-wrapper">
+      <form class="text-center border border-light p-5" action="#!">
+
+          <p class="h4 mb-4">Sign up</p>
+
+          <div class="form-row mb-4">
+              <div class="col">
+                  <!-- First name -->
+                  <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
+              </div>
+              <div class="col">
+                  <!-- Last name -->
+                  <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
+              </div>
+          </div>
+
+          <!-- E-mail -->
+          <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+
+          <!-- Password -->
+          <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+
+
+          <!-- Sign up button -->
+          <button class="btn btn-info my-4 btn-block" type="submit">Sign Up</button>
+
+          <!-- Social register -->
+          <p>or sign up with:</p>
+
+          <a href="#" class="mx-2" role="button" ><i class="fab fa-linkedin-in light-blue-text" data-toggle="modal" data-target="#OAuthModal"></i></a>
+          <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text" data-toggle="modal" data-target="#OAuthModal"></i></a>
+
+          <hr>
+
+          <!-- Terms of service -->
+          <p>By clicking
+              <em>Sign up</em> you agree to our
+              Terms of Service
+
+      </form>
+  </div>
+
+{% endblock%}
+
+{% block additional_scripts %}
+  <script>activate_navigation_link("register");</script>
+{% endblock %}

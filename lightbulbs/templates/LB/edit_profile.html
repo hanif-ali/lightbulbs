@@ -1,0 +1,195 @@
+{% extends 'LB/partials/profile_base.html' %}
+{% block content %}
+{% load widget_tweaks %}
+{% load data_tweaks %}
+<div class="container emp-profile">
+            <form method="post">
+            {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head">
+                                    <div class="row">
+                                        <div class="col">
+                                            {% render_field form.first_name class="form-control mb-4" placholder="First Name"%}
+                                        </div>
+                                        <div class="col">
+                                            {% render_field form.last_name class="form-control mb-4" placholder="Last Name"%}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            {% render_field form.description class="form-control" placeholder="Description here..."%}
+                                        </div>
+                                    </div>
+                                    <p class="proile-rating">RANKINGS : <span>Not Ranked</span></p>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bio</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#skills" role="tab" aria-controls="profile" aria-selected="false">Skills</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#links" role="tab" aria-controls="profile" aria-selected="false">Links</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-work">
+                            <p>Links:</p>
+                            <a href="{{form.linkedin.value|default:"#"}}"><span class="fab fa-linkedin-in"></span> LinkedIn</a><br/>
+                            <a href="{{form.facebook.value|default:"#"}}"><span class="fab fa-facebook"></span> Facebook</a><br/>
+                            <a href="{{form.github.value|default:"#"}}"><span class="fab fa-github"></span> Github</a><br/>
+                            <p>SKILLS</p>
+                                {% get_list form.skills as formskills %}
+                                {% for skill in formskills %}
+                                    <a class="my-2">{{skill}}</a><br>
+                                {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Username</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {% render_field form.username class="form-control mb-4" placholder="any_username"%}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {% render_field form.email class="form-control mb-4" placholder="example@domain.com"%}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Age</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {% render_field form.age class="form-control mb-4" placholder="Your Age..."%}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Contact Number</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {% render_field form.contact_number class="form-control mb-4" placholder="(Country Code) (Phone Number)"%}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Profession</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {% render_field form.profession class="form-control mb-4" placholder="ex. Graphics Designer"%}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-10"></div>
+                                            <div class="col-md-2">
+                                                <input type="submit" class="btn btn-primary" value="Save">
+                                            </div>
+                                        </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                                <div class="row">
+                                    {% render_field form.bio class="form-control mb-4" placeholder="Writer your bio here..."%}
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10"></div>
+                                    <div class="col-md-2">
+                                        <input type="submit" class="btn btn-primary" value="Save">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="skills" role="tabpanel" aria-labelledby="profile-tab">
+
+                                <input type="hidden" name="skills" value="{{form.skills.value}}" name="skills" id="skills-hidden">
+
+                                <div class="row">
+                                    <input type="text" class="form-control my-3" placeholder="Sports, Management, etc." id="new-skill">
+                                    <a class="btn btn-primary" id="add-skill-button">Add Skill</a>
+
+                                </div>
+                                <div class="row my-4">
+                                    <ul id="skills-list">
+                                    
+                                        {% for skill in formskills %}
+                                        <li class="my-2">{{skill}}</li>
+                                        {% endfor %}
+
+                                    </ul>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-10"></div>
+                                    <div class="col-md-2">
+                                        <input type="submit" class="btn btn-primary" value="Save">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="links" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>LinkedIn</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {% render_field form.linkedin class="form-control mb-4" placholder="https://linkedin.com/in/<username>"%}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Facebook</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {% render_field form.facebook class="form-control mb-4" placholder="https://facebook.com/<username>"%}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Github</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                {% render_field form.github class="form-control mb-4" placholder="https://github.com/<user-name>"%}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-10"></div>
+                                            <div class="col-md-2">
+                                                <input type="submit" class="btn btn-primary" value="Save">
+                                            </div>
+                                        </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>           
+        </div>
+
+{% endblock %}
+
+{% block additional_scripts%}
+    <script>
+        activate_navigation_link("settings")
+    </script>
+{% endblock %}

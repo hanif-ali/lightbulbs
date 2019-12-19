@@ -7,6 +7,9 @@ env/
 # Python generated files
 */**/__pycache__
 *.pyc 
+*/**/migrations/   # Django Database migrations
+*/**/migrations/*   
+
 
 # Vim Temp files
 *.sw?

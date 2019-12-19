@@ -1,0 +1,25 @@
+ <div class="col-md-12">
+    <div class="card created">
+      <div class="card-header">
+        <a href="{{idea.get_absolute_url}}" class="card-title title">{{idea.title}}</a>
+        <div class="badge badge-secondary" style="float: right">
+          {{idea.category}}
+        </div>
+      </div>
+        <div class="card-body">
+        <p class="card-text created-description">
+            {{idea.description}}
+        </p>
+        </div>
+        <div class="card-footer created-footer">
+        <div class="footer-left">
+            <small>Created on <strong>{{idea.timestamp}}</strong></small> 
+        </div>
+        <div class="footer-right">
+            <a href="{% url 'edit-idea' id_number=idea.id %}" class="far fa-edit created-edit-button"></a>
+            <button data-idea="{{idea.id}}" class="fa fa-trash created-delete-button"></button>
+        
+        </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+[
+  {
+    "model": "LB.lbuser",
+    "pk": 1, 
+    "fields": {
+      "password": "pbkdf2_sha256$180000$zY4LxTyFh374$sFs42UA6EffpC87LFYaDcoOUeK7h4jSemmm3d6AydrU=", 
+      "last_login": "2019-12-16T21:05:31.098Z", 
+      "is_superuser": true, 
+      "username": "root_user", 
+      "email": "", 
+      "is_staff": true, 
+      "is_active": true, 
+      "date_joined": "2019-12-16T21:03:03.806Z", 
+      "first_name": "Root", 
+      "last_name": "User", 
+      "description": "", 
+      "profession": "", 
+      "bio": null, 
+      "age": 19, 
+      "skills": null, 
+      "contact_number": null, 
+      "linkedin": null, 
+      "facebook": null, 
+      "github": null, 
+      "groups": [], 
+      "user_permissions": [], 
+      "upvotes": [], 
+      "downvotes": [], 
+      "stars": []
+    }
+  }
+]

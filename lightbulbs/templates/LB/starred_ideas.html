@@ -1,0 +1,38 @@
+{% extends 'LB/partials/feed_base.html' %}
+{% load static %}
+
+{% block content%}
+
+<div class="nav nav-tabs nav-fill mb-4" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link" id="nav-home-tab" href="{% url "my-ideas" %}">Created</a>
+    <a class="nav-item nav-link active" id="nav-profile-tab" href="{% url "starred-ideas" %}">Starred</a>
+</div>
+
+{% for idea in ideas %}
+  {% include 'LB/partials/feed_item.html' %}
+
+{% empty %}
+<div class="col-md-12">
+  <div class="alert alert-info">
+  No Starred items to show.
+  </div>
+</div>
+
+{% endfor %}
+
+
+
+
+<div class="col-md-12">
+  {% include 'LB/partials/pagination.html' %}
+</div>
+
+{% endblock %}
+
+
+{% block additional_scripts %}
+  <script>
+    activate_navigation_link("home");
+    activate_side_navigation_link("my-ideas");
+  </script>
+{% endblock %}
