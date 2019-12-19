@@ -1,6 +1,23 @@
 {% extends 'LB/partials/home_base.html' %}
 {% block content%}
 
+<div class="modal fade" id="OAuthModal" tabindex="-1" role="dialog" aria-labelledby="createModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Sorry :( </h5>
+      </div>
+      <div class="modal-body">
+        OAuth for Github and LinkedIn are currently in development.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
   <div class="login-form-wrapper">
       <form class="text-center border border-light p-5" action="#!">
 
@@ -30,17 +47,15 @@
           <!-- Social register -->
           <p>or sign up with:</p>
 
-          <a href="#" class="mx-2" role="button"><i class="fab fa-facebook-f light-blue-text"></i></a>
-          <a href="#" class="mx-2" role="button"><i class="fab fa-twitter light-blue-text"></i></a>
-          <a href="#" class="mx-2" role="button"><i class="fab fa-linkedin-in light-blue-text"></i></a>
-          <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text"></i></a>
+          <a href="#" class="mx-2" role="button" ><i class="fab fa-linkedin-in light-blue-text" data-toggle="modal" data-target="#OAuthModal"></i></a>
+          <a href="#" class="mx-2" role="button"><i class="fab fa-github light-blue-text" data-toggle="modal" data-target="#OAuthModal"></i></a>
 
           <hr>
 
           <!-- Terms of service -->
           <p>By clicking
               <em>Sign up</em> you agree to our
-              <a href="" target="_blank">terms of service</a>
+              Terms of Service
 
       </form>
   </div>
