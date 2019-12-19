@@ -4,12 +4,12 @@
 {% block content%}
 
 <div class="nav nav-tabs nav-fill mb-4" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-home-tab" href="{% url "my-ideas" %}">Created</a>
-    <a class="nav-item nav-link" id="nav-profile-tab" href="{% url "my-ideas" %}">Starred</a>
+    <a class="nav-item nav-link" id="nav-home-tab" href="{% url "my-ideas" %}">Created</a>
+    <a class="nav-item nav-link active" id="nav-profile-tab" href="{% url "my-ideas" %}">Starred</a>
 </div>
 
 {% for idea in ideas %}
-  {% include 'LB/partials/created_idea.html' %}
+  {% include 'LB/partials/feed_item.html' %}
 {% endfor %}
 
 

@@ -215,7 +215,7 @@ class MyIdeas(ListView, LoginRequiredMixin):
         
     template_name = 'LB/my_ideas.html'
     context_object_name = 'ideas'
-    paginate_by = 1
+    paginate_by = 6
 
 
 

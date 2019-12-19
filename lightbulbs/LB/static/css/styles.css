@@ -84,21 +84,39 @@
   float: right;
 }
 
-.delete-button, .edit-button {
+.delete-button, .created-delete-button, .edit-button, .created-edit-button {
   border-style: none;
   background: none;
   margin: 0 6px;
 }
 
-.delete-button:hover {
+.delete-button:hover, .created-delete-button:hover {
   color: red;
 }
 
-.edit-button:hover {
+.edit-button:hover, .created-edit-button:hover {
   color: #3258c0;
 }
 
 .created {
   margin-bottom: 10px;
+}
+
+.created .title {
+  color: black;
+  text-decoration: none;
+}
+
+.created .title:hover {
+  color: #2b2929;
+}
+
+.created .created-edit-button {
+  color: black;
+  text-decoration: none;
+}
+
+.created .created-edit-button:hover {
+  color: #3a84af;
 }
 /*# sourceMappingURL=styles.css.map */

@@ -125,3 +125,16 @@ proposal_delete_buttons.forEach(button => {
         }
     })
 })
+
+
+
+var created_delete_buttons = document.querySelectorAll(".created-delete-button")
+created_delete_buttons.forEach(button => {
+    button.addEventListener('click', event => {
+        idea_id = button.dataset.idea;
+        confirmation = confirm("Are you sure you want to delete the Idea?")
+        if(confirmation){
+            document.location.replace(`http://${window.location.hostname}:${window.location.port}/me/ideas/delete/${idea_id}`)
+        }
+    })
+})
