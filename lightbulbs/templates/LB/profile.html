@@ -1,68 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Lightbulbs - Idea Sharing Platform</title>
+{% extends 'LB/partials/profile_base.html' %}
+{% load data_tweaks %}
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    
-    <link rel="stylesheet" href="css/bootstrap4-wizardry.min.css">
-    
-    <link rel="stylesheet" href="css/styles.css">
-    
-    <link href="https://fonts.googleapis.com/css?family=Comfortaa|Roboto:300,400" rel="stylesheet">
-    <link rel="stylesheet" href="css/profile.css">
-    
-    
-  </head>
-  <body>
 
-  <div class="bg-dark navbar-dark text-white">
-    <div class="container">
-      <nav class="navbar px-0 navbar-expand-lg navbar-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a href="#" class="navbar-brand text-white">
-              <span class="fa fa-lightbulb text-warning mx-2"></span>
-            LightBulbs</a>
-            <a href="index.html" class="nav-link text-white">Home</a>
-            <a href="app.html" class="text-decoration-none nav-link">My Profile</a> 
-            <a href="form.html" class="text-decoration-none nav-link">Settings</a>
-            <a href="form.html" class="text-decoration-none nav-link">Log Out</a>
-          </div>
-        </div>
-      </nav>
-
-    </div>
-  </div>
-
+{% block content %}
 <div class="container emp-profile">
             <form method="post">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-img">
                             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                            </div>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="profile-head">
                                     <h5>
-                                        Kshiti Ghelani
-                                        <span class="badge badge-secondary age mx-2">15</span>
+                                        {{data.first_name}} {{data.last_name}}
+                                        <span class="badge badge-secondary age mx-2">{{data.age}}</span>
                                     </h5>
                                     <h6>
-                                        Web Developer and Designer
+                                        {{data.description | default:"No description added."}}
                                     </h6>
-                                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                                    <p class="proile-rating">RANKINGS : <span>Not Ranked</span></p>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -74,22 +32,25 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                        {% if self_profile %}
+                            <a href="{% url 'edit-profile' %}" class="profile-edit-btn btn btn-secondary" name="btnAddMore">Edit Profile</a>
+                        {% else %}
+                            <a href="{% url 'send-message' id_number=data.id %}" class="profile-edit-btn btn btn-secondary" name="btnAddMore">Send Message</a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-work">
                             <p>Links:</p>
-                            <a href=""><span class="fab fa-linkedin-in"></span> LinkedIn</a><br/>
-                            <a href=""><span class="fab fa-facebook"></span> Facebook</a><br/>
-                            <a href=""><span class="fab fa-github"></span> Github</a><br/>
+                            <a href="{{data.linkedin|default:"#"}}"><span class="fab fa-linkedin-in"></span> LinkedIn</a><br/>
+                            <a href="{{data.facebook |default:"#"}}"><span class="fab fa-facebook"></span> Facebook</a><br/>
+                            <a href="{{data.github |default:"#"}}"><span class="fab fa-github"></span> Github</a><br/>
                             <p>SKILLS</p>
-                            <a href="">Web Designer</a><br/>
-                            <a href="">Web Developer</a><br/>
-                            <a href="">WordPress</a><br/>
-                            <a href="">WooCommerce</a><br/>
-                            <a href="">PHP, .Net</a><br/>
+                                {% get_list data.skills as formskills %}
+                                {% for skill in formskills %}
+                                <a class="my-2">{{skill}}</a><br>
+                                {% endfor %}
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -100,7 +61,7 @@
                                                 <label>Username</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Kshiti123</p>
+                                                <p>{{data.username}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -108,7 +69,7 @@
                                                 <label>Name</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Kshiti Ghelani</p>
+                                                <p>{{data.first_name}} {{data.last_name}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -116,7 +77,7 @@
                                                 <label>Email</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>kshitighelani@gmail.com</p>
+                                                <p>{{data.email|default:"Email not added."}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -124,7 +85,7 @@
                                                 <label>Contact Number</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>123 456 7890</p>
+                                                <p>{{data.contact_number|default:"Contact Number not added."}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -132,12 +93,12 @@
                                                 <label>Profession</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Web Developer and Designer</p>
+                                                <p>{{data.profession|default:"Profession not added."}}</p>
                                             </div>
                                         </div>
                             </div>
                             <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                flaskjdflakj fals;jfd al;skdjf alk
+                                {{data.bio|default:"No bio added."}}
                             </div>
                         </div>
                     </div>
@@ -145,15 +106,11 @@
             </form>           
         </div>
 
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="js/script.js"></script>
-
-  </body>
-</html>
+{% endblock %}
+{% block additional_scripts%}
+    <script>
+        {% if self_profile %}
+            activate_navigation_link("profile")
+        {% endif %}
+    </script>
+{% endblock %}

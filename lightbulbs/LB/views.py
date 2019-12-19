@@ -357,12 +357,29 @@ class Profile(DetailView):
     def get_object(self):
         return get_object_or_404(LBUser, id=self.request.user.id)
 
+    def get_context_data(self, **kwargs):
+        context = super(Profile, self).get_context_data(**kwargs)
+        context['self_profile'] = True
+        return context
+
+
+class UserProfile(DetailView):
+    model = LBUser
+    template_name = 'LB/profile.html'
+    context_object_name = "data"
+    pk_url_kwarg = "id_number"
+
+    def get_context_data(self, **kwargs):
+        context = super(UserProfile, self).get_context_data(**kwargs)
+        context['self_profile'] = False
+        return context
+
 
 
 class EditProfile(LoginRequiredMixin, UpdateView):
     form = EditProfileForm
     template_name = 'LB/edit_profile.html'
-    fields = ['username','first_name','last_name', 'email','age','contact_number','profession','bio', 'skills', 'linkedin', 'facebook', 'github']
+    fields = ['username','description', 'first_name','last_name', 'email','age','contact_number','profession','bio', 'skills', 'linkedin', 'facebook', 'github']
     success_url = reverse_lazy("profile")
 
     def get_object(self):

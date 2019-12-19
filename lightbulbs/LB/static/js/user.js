@@ -138,3 +138,20 @@ created_delete_buttons.forEach(button => {
         }
     })
 })
+
+
+
+var add_skill_button = document.getElementById("add-skill-button")
+
+add_skill_button.addEventListener("click", function(){
+    var skills = document.getElementById("skills-hidden")
+    var skills_list = document.getElementById("skills-list")
+    var new_skill = document.getElementById("new-skill").value
+    if(new_skill != ""){
+        new_skill_tag = document.createElement("li")
+        new_skill_tag.innerHTML = new_skill
+        new_skill_tag.classList.add("my-2")
+        skills_list.appendChild(new_skill_tag)
+        skills.value += new_skill + "~"
+    }
+})

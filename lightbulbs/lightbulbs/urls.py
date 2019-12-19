@@ -33,6 +33,7 @@ urlpatterns = [
     path("inbox/send/<int:id_number>", LB.SendMessage.as_view(), name="send-message"),
     path("inbox/delete/<int:id_number>", LB.DeleteMessage.as_view(), name="delete-message"),
     path("me", LB.Profile.as_view(), name="profile"),
+    path("user/<int:id_number>", LB.UserProfile.as_view(), name="user-profile"),
     path("me/edit", LB.EditProfile.as_view(), name="edit-profile"),
     path("me/ideas", LB.MyIdeas.as_view(), name="my-ideas"),
     path("me/ideas/starred", LB.StarredIdeas.as_view(), name="starred-ideas"),
