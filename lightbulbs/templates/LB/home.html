@@ -1,10 +1,20 @@
 {% extends 'LB/partials/home_base.html' %}
 {% block content %}
+<style>
+  .jumbotron-content h1{
+    color: white;
+    transition: all 1s ease;
+  }
+  .jumbotron-content:hover h1{
+    color: rgb(207, 209, 104);
+  }
+
+</style>
 
   <div class="jumbotron bg-wizardry bg-dark text-white mb-0 radius-0">
-    <div class="container">
+    <div class="container jumbotron-content">
 
-        <h1 class="display-1 text-light">Lightbulbs
+        <h1 class="display-1">Lightbulbs
         </h1>
         <span class="lead">An idea-sharing Platform</span>
 
