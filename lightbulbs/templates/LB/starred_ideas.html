@@ -10,7 +10,16 @@
 
 {% for idea in ideas %}
   {% include 'LB/partials/feed_item.html' %}
+
+{% empty %}
+<div class="col-md-12">
+  <div class="alert alert-info">
+  No Starred items to show.
+  </div>
+</div>
+
 {% endfor %}
+
 
 
 

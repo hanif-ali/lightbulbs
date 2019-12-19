@@ -1,5 +1,0 @@
-{% for notification in notifications %}
- <p>{{notification}}
- <a href="{% url 'delete-notification' id_number=notification.id %}">Delete</a>
- </p>
-{% endfor%}

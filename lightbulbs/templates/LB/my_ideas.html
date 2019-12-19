@@ -10,8 +10,15 @@
 
 {% for idea in ideas %}
   {% include 'LB/partials/created_idea.html' %}
-{% endfor %}
 
+{% empty %}
+<div class="col-md-12">
+  <div class="alert alert-info">
+  You do not have any Created Lightbulbs. 
+  </div>
+</div>
+
+{% endfor %}
 
 
 <div class="col-md-12">

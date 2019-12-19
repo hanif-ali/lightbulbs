@@ -1,8 +1,0 @@
-{% for message in messages %}
-    <p>
-    {{message}}
-    <a href="{% url 'delete-message' id_number=message.id %}">Delete</a>
-    </p>
-
-
-{% endfor %}
