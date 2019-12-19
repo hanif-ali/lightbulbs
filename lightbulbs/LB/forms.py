@@ -54,7 +54,7 @@ class LBCreationForm(forms.ModelForm):
 
 
 class ProposalForm(forms.ModelForm):
-    lightbulb_id = forms.IntegerField()
+    lightbulb_id = forms.IntegerField(widget=forms.HiddenInput)
     
     class Meta:
         model = Proposal

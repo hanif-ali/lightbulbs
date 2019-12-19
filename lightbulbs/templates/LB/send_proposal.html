@@ -1,0 +1,37 @@
+{% extends 'LB/partials/feed_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content%}
+
+  <div class="col-md-12">
+
+    <h5>Send Proposal</h5>
+    <hr>
+
+    <p><strong>Title: </strong>{{lightbulb.title}}</p>
+    <p><strong>Category: </strong>{{lightbulb.category}}</p>
+    <p><strong>Created by: </strong>{{lightbulb.creator}}</p>
+    <p><strong>Created on: </strong>{{lightbulb.timestamp}}</p>
+
+
+    <form action="{% url 'send-proposal' id_number=lightbulb.id%}" method="post">
+        {% csrf_token %}
+
+        {% render_field form.message class="form-control m-0" placeholder="Type your proposal message here..." %}
+        {% render_field form.lightbulb_id %}
+
+        <input type="submit" value="Send" class="btn btn-primary my-3">
+
+    </form>
+</div>
+
+{% endblock %}
+
+
+{% block additional_scripts %}
+  <script>
+    activate_navigation_link("home");
+    activate_side_navigation_link("inbox");
+  </script>
+{% endblock %}
