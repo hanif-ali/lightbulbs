@@ -96,6 +96,17 @@ class Feed(ListView, LoginRequiredMixin):
     paginate_by = 6
 
 
+    def post(self, *args, **kwargs):
+        query = self.request.POST.get("query")
+        if query:
+            object_list = self.model.objects.filter(title__icontains = query)
+        else:
+            object_list = self.model.objects.all()
+
+        return render(self.request, "LB/feed.html", {"ideas": object_list})
+
+
+
 class Idea(DetailView, LoginRequiredMixin): 
     model = Lightbulb
     template_name = 'LB/idea.html'
@@ -384,7 +395,3 @@ class EditProfile(LoginRequiredMixin, UpdateView):
 
     def get_object(self):
         return get_object_or_404(LBUser, id=self.request.user.id)
-
-
-def test_view(request):
-    return render(request, "LB/home.html", {})

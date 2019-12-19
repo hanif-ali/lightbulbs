@@ -1,7 +1,8 @@
 <div class="col-md-3">
-    <form class="mb-3">
+    <form class="mb-3" action="{% url 'feed' %}" method="post">
+    {% csrf_token %}
         <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search Lightbulbs">
+        <input type="text" class="form-control" placeholder="Search Lightbulbs" name="query">
         <div class="input-group-append">
             <button type="submit" class="btn btn-primary">Search</button>
         </div>

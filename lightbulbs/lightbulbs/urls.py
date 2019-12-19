@@ -18,7 +18,6 @@ from django.urls import path
 import LB.views as LB
 
 urlpatterns = [
-    path('p', LB.test_view),
     path('admin/', admin.site.urls),
     path('', LB.homepage, name='home-page'), 
     path("login", LB.login_view, name='login'),
