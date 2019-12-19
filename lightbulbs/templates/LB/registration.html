@@ -1,4 +1,5 @@
 {% extends 'LB/partials/home_base.html' %}
+{% load widget_tweaks %}
 {% block content%}
 
 <div class="modal fade" id="OAuthModal" tabindex="-1" role="dialog" aria-labelledby="createModal" aria-hidden="true">
@@ -19,26 +20,39 @@
 
 
   <div class="login-form-wrapper">
-      <form class="text-center border border-light p-5" action="#!">
+  {{form.errors}}
+      <form class="text-center border border-light p-5" action="{% url 'register'%}" method="post">
+          {% csrf_token %}
 
           <p class="h4 mb-4">Sign up</p>
 
           <div class="form-row mb-4">
               <div class="col">
                   <!-- First name -->
-                  <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="First name">
+                  {% render_field form.first_name class="form-control" placeholder="First Name" %}
               </div>
               <div class="col">
                   <!-- Last name -->
-                  <input type="text" id="defaultRegisterFormLastName" class="form-control" placeholder="Last name">
+                  {% render_field form.last_name class="form-control" placeholder="Last Name" %}
               </div>
           </div>
 
           <!-- E-mail -->
-          <input type="email" id="defaultRegisterFormEmail" class="form-control mb-4" placeholder="E-mail">
+          {% render_field form.email class="form-control mb-4" placeholder="Email" %}
+
+          <div class="form-row mb-4">
+              <div class="col">
+                  <!-- Last name -->
+                  {% render_field form.username class="form-control" placeholder="Username" %}
+              </div>
+              <div class="col">
+                  <!-- First name -->
+                  {% render_field form.age class="form-control" placeholder="Age" %}
+              </div>
+          </div>
 
           <!-- Password -->
-          <input type="password" id="defaultRegisterFormPassword" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock">
+          {% render_field form.password class="form-control" placeholder="Password" %}
 
 
           <!-- Sign up button -->
