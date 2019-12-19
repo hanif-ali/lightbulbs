@@ -26,7 +26,20 @@
         </div>
     </div>
 
-  {% endfor %}
+    <a class="btn btn-primary" href="{% url 'send-proposal' id_number=idea.id %}" >
+      Send a Proposal
+    </a>
+    
+{% empty %}
+
+    <div class="alert alert-info">
+      There are no Proposals for this idea yet.
+    </div>
+    <a class="btn btn-primary" href="{% url 'send-proposal' id_number=idea.id %}" >
+      Be The First to Send a Proposal
+    </a>
+
+{% endfor %}
 
 {% endblock %}
 
@@ -34,6 +47,5 @@
 {% block additional_scripts %}
   <script>
     activate_navigation_link("home");
-    activate_side_navigation_link("notifications");
   </script>
 {% endblock %}

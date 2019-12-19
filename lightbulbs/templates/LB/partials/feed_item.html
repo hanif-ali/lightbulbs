@@ -1,8 +1,20 @@
+<style>
+  .feed-item-title{
+    color: black;
+  }
+  .feed-item-title:hover{
+    color:rgb(25,25,25);
+    text-decoration: none;
+  }
+</style>
+
   <div class="col-md-12">
     <div class="card feed-item">
 
       <div class="card-header">
-        <a class="card-title feed-item-title">{{idea.title}}</a>
+        <a  href="{% url 'idea' id_number=idea.id %}" class="card-title feed-item-title">
+          {{idea.title}}
+        </a>
         <div class="badge badge-secondary">
           {{idea.category}}
         </div>
