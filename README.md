@@ -4,7 +4,7 @@
 [![for-cs114](https://img.shields.io/badge/for-CS%20114-blue)](http://www.nust.edu.pk/INSTITUTIONS/Schools/SEECS/ap/ug/BSE-2018/Pages/Course-Curriculum.aspx)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/Django-v3-blue)](https://www.djangoproject.org/)
-[![built-with-love](https://img.shields.io/badge/Built%20with-%E2%9D%A4%EF%B8%8F-red)]()
+[![built-with-love](https://img.shields.io/badge/Built%20with-%E2%9D%A4%EF%B8%8F%20for%20%3C%2F%3E-red)]()
 [![dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen)]()
 [![license](https://img.shields.io/badge/license-MIT-%23373737)]()
 
