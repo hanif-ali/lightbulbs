@@ -47,23 +47,36 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-### 6. Load Root User Fixture
-To load the Super User's fixture, run
-```
-python manage.py loaddata UserFixture.json
-```
-
-### 7. Start Up The Server
+### 6. Start Up The Server
 Run the localhost using
 ```
 python manage.py runserver
 ```
+Since the database has not data yet, you will only be able to see the Home Pages. You will not be able to create a superuser through `createsuperuser` because te app uses modified User Model. So you will need to add the pre-defined superUser model in `UserFixture.json` using the steps mentioned in the next section.
 
 ## Linux
 ----------
 The steps are same as above. Except, you may need to replace `py` with `python3` while creating the Virtual Environments. If your Python 3 executable is pointed to by `python`, run that. Moreover, the virtual environment is activated by running `env/bin/activate`. 
 
+# Loading Dummy Data
+To Load the SuperUser fixture, run
+```
+python manage.py loaddata UserFixture.json
+```
+The default Super User Credentials are:
+- Username: root_user
+- Password: root_password
+
+You can change it from  `https://localhost:8000/admin`
+
+To load Dummy data for testing purposes, run
+```
+python manage.py loaddata DummyData.json
+```
+You can open `DummyData.json` with your favorite text editor to see the data being added.
+All Users added have the password `dummy_password`
+
 # Contributing
 If you want to contribute any feature to the application, fork this repository and Submit a pull request once you think it is ready to merge.
 Create issues to report bugs or suggest any form of changes.
-All forms of contribution are highly welcomed.
+All forms of contribution are highly welcomed. :)
