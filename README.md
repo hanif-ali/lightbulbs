@@ -8,7 +8,7 @@
 [![dependencies](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen)]()
 [![license](https://img.shields.io/badge/license-MIT-%23373737)]()
 
-Lightbulbs is an idea sharing platform that brings like minded people together to share and discuss ideas.
+Lightbulbs is a semester project that we created as part of our semester project for CS114. It is an idea sharing platform that brings like minded people together to share and discuss ideas.
 
 # Installation Steps
 
